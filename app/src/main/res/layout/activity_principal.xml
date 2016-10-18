@@ -8,10 +8,63 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.reversi.ricardo.campos.reversi.principal">
+    tools:context="com.reversi.ricardo.campos.reversi.principal"
+    android:background="@color/Background">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:background="@color/colorAccent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+
+            <Button
+                android:id="@+id/informacion"
+                android:background="@android:drawable/ic_dialog_info"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@android:color/background_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="177dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:text="Reversi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/reversi"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:typeface="sans"
+                android:textSize="36sp"
+                android:fontFamily="casual"
+                android:textStyle="normal|bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom|right">
+
+            <Button
+                android:id="@+id/ajustes"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?android:attr/floatingToolbarOpenDrawable"
+                android:backgroundTint="@android:color/background_light" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>
