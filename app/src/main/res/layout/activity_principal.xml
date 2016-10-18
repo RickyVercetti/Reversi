@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:gravity="center"
-        android:background="@color/colorAccent">
+        android:background="@color/Background">
 
         <LinearLayout
             android:orientation="vertical"
@@ -37,7 +37,8 @@
             android:orientation="vertical"
             android:layout_width="177dp"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:weightSum="1">
 
             <TextView
                 android:text="Reversi"
@@ -49,7 +50,15 @@
                 android:typeface="sans"
                 android:textSize="36sp"
                 android:fontFamily="casual"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:layout_weight="0.42" />
+
+            <Button
+                android:text="JUGAR"
+                android:id="@+id/jugar"
+                android:layout_width="75dp"
+                android:background="@color/colorPrimary"
+                android:layout_height="32dp" />
         </LinearLayout>
 
         <LinearLayout
