@@ -56,7 +56,7 @@
             <Button
                 android:text="JUGAR"
                 android:id="@+id/jugar"
-                android:layout_width="75dp"
+                android:layout_width="102dp"
                 android:background="@color/colorPrimary"
                 android:layout_height="32dp" />
         </LinearLayout>
