@@ -23,14 +23,13 @@
             android:orientation="vertical"
             android:layout_width="88dp"
             android:layout_height="match_parent"
-            android:gravity="bottom">
+            android:gravity="bottom|right">
 
             <Button
                 android:id="@+id/informacion"
-                android:background="@android:drawable/ic_dialog_info"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:backgroundTint="@android:color/background_light" />
+                android:background="@android:drawable/ic_menu_info_details" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,14 +64,14 @@
             android:orientation="vertical"
             android:layout_width="88dp"
             android:layout_height="match_parent"
-            android:gravity="bottom|right">
+            android:gravity="bottom|left">
 
             <Button
                 android:id="@+id/ajustes"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="?android:attr/floatingToolbarOpenDrawable"
-                android:backgroundTint="@android:color/background_light" />
+
+                android:background="@android:drawable/ic_menu_preferences" />
         </LinearLayout>
 
     </LinearLayout>
