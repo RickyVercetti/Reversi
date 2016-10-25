@@ -3,36 +3,36 @@ package com.reversi.ricardo.campos.reversi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class principal extends AppCompatActivity {
 
-    @Override
-    //protected int casillas=7;
 
     //TODO  Cambiar los botones por layouts dentro de un for y luego añadir los botones
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = LayoutInflater.from(this);
-        RelativeLayout layout_secundario=(RelativeLayout) inflater.inflate(R.layout.activity_juego, null,false);
-        LinearLayout dinamico = (LinearLayout) layout_secundario.findViewById(R.id.dinamico);
-        Button boton = new Button(this);
-        boton.setText("HOLA");
-        boton.setWidth(20);
-        boton.setHeight(20);
-        //boton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        dinamico.addView(boton);
-        Button boton1 = new Button(this);
+        setContentView(R.layout.activity_principal);
+    }
 
-        boton1.setText("ADIOS");
-        boton1.setWidth(20);
-        boton1.setHeight(20);
-        //boton1 .setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        dinamico.addView(boton1);
-        setContentView(layout_secundario);
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_principal,menu);
+        return true;
+    }
+
+    public void onClick(View v)
+    {
+        if (v.getId()==R.id.jugar)
+        {
+            //llamar a juego
+            //TODO hacer que funcione el toast y llevar a la pantalla juego
+            Toast.makeText(this, "A Jugar!", Toast.LENGTH_SHORT).show();
+            //setContentView(R.layout.activity_juego);
+        }
     }
 }

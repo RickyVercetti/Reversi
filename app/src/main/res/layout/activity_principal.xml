@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.reversi.ricardo.campos.reversi.principal"
+    tools:context="com.reversi.ricardo.campos.reversi.menu_principal"
     android:background="@color/Background">
 
     <LinearLayout
@@ -21,20 +21,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="88dp"
-            android:layout_height="match_parent"
-            android:gravity="bottom|right">
-
-            <Button
-                android:id="@+id/informacion"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@android:drawable/ic_menu_info_details" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="177dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:weightSum="1">
@@ -59,20 +46,6 @@
                 android:background="@color/colorPrimary"
                 android:layout_height="32dp" />
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="88dp"
-            android:layout_height="match_parent"
-            android:gravity="bottom|left">
-
-            <Button
-                android:id="@+id/ajustes"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-
-                android:background="@android:drawable/ic_menu_preferences" />
-        </LinearLayout>
-
     </LinearLayout>
+
 </RelativeLayout>
