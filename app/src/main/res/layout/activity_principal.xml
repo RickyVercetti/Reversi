@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/reversi"
-                android:gravity="center"
+                android:gravity="top|center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:typeface="sans"
                 android:textSize="36sp"
