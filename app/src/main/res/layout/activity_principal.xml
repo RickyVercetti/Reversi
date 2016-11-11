@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.reversi.ricardo.campos.reversi.menu_principal"
+    tools:context="com.reversi.ricardo.campos.reversi.principal"
     android:background="@color/Background">
 
     <LinearLayout
@@ -44,7 +44,7 @@
                 android:id="@+id/jugar"
                 android:layout_width="102dp"
                 android:background="@color/colorPrimary"
-                android:layout_height="32dp" />
+                android:layout_height="32dp"/>
         </LinearLayout>
     </LinearLayout>
 
