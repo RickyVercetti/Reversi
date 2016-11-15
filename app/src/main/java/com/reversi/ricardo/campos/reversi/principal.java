@@ -15,6 +15,9 @@ import android.widget.Toast;
 public class principal extends AppCompatActivity {
 
 
+    private static int FACIL = 6;
+    private static int MEDIO = 8;
+    private static int DIFICIL = 10;
     //TODO  Cambiar los botones por layouts dentro de un for y luego añadir los botones
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +35,12 @@ public class principal extends AppCompatActivity {
         configuracion.setMargins(0,0,0,0);
         configuracion.weight=1;
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < DIFICIL; i++) {
             LinearLayout filabotones = new LinearLayout(this);
             filabotones.setOrientation(LinearLayout.HORIZONTAL);
 
             filabotones.setLayoutParams(configuracion);
-            for (int j = 0; i < 7; i++) {
+            for (int j = 0; j < DIFICIL; j++) {
                 Button boton = new Button(this);
                 boton.setLayoutParams(configuracion);
                 filabotones.addView(boton);
@@ -64,28 +67,6 @@ public class principal extends AppCompatActivity {
 
 
         }
-        //Añadir más botones si los hay
-    }
-    /*public void pantalla_juego()
-    {
-        //super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_juego);
 
-        LayoutInflater inflater = LayoutInflater.from(this);
-        RelativeLayout layout_secundario = (RelativeLayout) inflater.inflate(R.layout.activity_juego, null, false);
-        LinearLayout dinamico[] = (LinearLayout[]) layout_secundario.findViewById(R.id.dinamico);
-        //Button buttons[][];
-        for (int i = 0; i < 7; i++) {
-            dinamico[i].setOrientation(LinearLayout.HORIZONTAL);
-            for (int j = 0; i < 7; i++) {
-                dinamico[j] = (new LinearLayout(this));
-                dinamico[j].setOrientation(LinearLayout.VERTICAL);
-                Button button[i][j] = new Button(this);
-                button[i][j].setHeight(20);
-                button[i][j].setWidth(20);
-                dinamico[i].addView(button[i][j]);
-            }
-        }
-        setContentView(layout_secundario);
-    }*/
+    }
 }
