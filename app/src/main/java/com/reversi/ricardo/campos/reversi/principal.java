@@ -13,14 +13,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import static com.reversi.ricardo.campos.reversi.R.id.dinamico;
 
 public class principal extends AppCompatActivity {
 
 
     private static int TAM = 8;
+    private boolean turno;
 
     private static int botonTAG = 0;
     //TODO linea para insertar vibración, falta insertar en el manifest
@@ -32,7 +36,7 @@ public class principal extends AppCompatActivity {
 
         //llamar a juego
         //TODO hacer que cambie de un activity a otro con un Intent
-        Toast.makeText(this, "A Jugar!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "A Jugar!", Toast.LENGTH_SHORT).show();
 
         LayoutInflater inflater = LayoutInflater.from(this);
         RelativeLayout layout_secundario = (RelativeLayout) inflater.inflate(R.layout.activity_juego, null, false);
@@ -54,6 +58,7 @@ public class principal extends AppCompatActivity {
                 tableroInicial(i,j,mitad,boton);
                 boton.setLayoutParams(configuracion);
                 filabotones.addView(boton);
+                boton.setOnClickListener(casillaJuego);
                 //casillaPermitida(i,j,botonTAG);
                 botonTAG++;
             }
@@ -63,6 +68,8 @@ public class principal extends AppCompatActivity {
     }
     public void tableroInicial(int i, int j,int mitad,Button boton)
     {
+        turno = true;
+
         if (j == mitad && i == mitad)
         {
             boton.setText("X");
@@ -92,7 +99,41 @@ public class principal extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         return true;
     }
+    private View.OnClickListener casillaJuego = new View.OnClickListener()
+    {
+        public void onClick(View v)
+        {
+            if (((Button)v).getText().equals(""))
+            {
+                if (turno==true)
+                {
+                    ((Button)v).setText("X");
+                    turno=false;
+                }
+                else
+                {
+                    ((Button) v).setText("O");
+                    turno = true;
+                }
+            }
+            cambiaPuntuaciones();
+        }
+    };
+    private void cambiaPuntuaciones()
+    {
+        TextView textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
+        TextView textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
+        Button boton;
+        //TODO hacer un contador para mirar el texto y cambiarlo en el TextView
+        for (int i = 0; i < TAM*TAM;i++)
+        {
+            if (botonTAG==0)
+            {
 
+            }
+        }
+
+    }
     public void onClick(View v) {
         if (v.getId() == R.id.jugar) {
             //llamar a juego
