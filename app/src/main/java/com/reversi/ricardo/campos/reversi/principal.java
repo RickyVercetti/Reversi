@@ -1,6 +1,7 @@
 package com.reversi.ricardo.campos.reversi;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -87,13 +88,13 @@ public class principal extends AppCompatActivity {
             boton.setText("O");
         }
     }
-    public View.OnClickListener botonesJuego = new View.OnClickListener()
+    /*public View.OnClickListener botonesJuego = new View.OnClickListener()
     {
         public void onClick(View v)
         {
             ((Button) v).setText("X");
         }
-    };
+    };*/
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
@@ -105,35 +106,40 @@ public class principal extends AppCompatActivity {
         {
             if (((Button)v).getText().equals(""))
             {
-                if (turno==true)
+                Object tag = ((Button)v).getTag();
+                if ((casillaPermitida((Button)v)))
                 {
-                    ((Button)v).setText("X");
-                    turno=false;
+                    if (turno==true)
+                    {
+                        ((Button)v).setText("X");
+                        turno=false;
+                    }
+                    else
+                    {
+                        ((Button) v).setText("O");
+                        turno = true;
+                    }
                 }
-                else
-                {
-                    ((Button) v).setText("O");
-                    turno = true;
+                //TODO metemos el contador de puntuaciones
+                TextView textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
+                TextView textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
+                int contadorMaquina = 0;
+                int contadorJugador = 0;
+                for (int i = 0; i < TAM;i++) {
+                    for (int j = 0; j < TAM; j++) {
+                        if (((Button) v).getText() == "X") {
+                            contadorJugador++;
+                        }else{
+                            contadorMaquina++;
+                        }
+                    }
                 }
+                textoJugador.setText(contadorJugador);
+                textoMaquina.setText(contadorMaquina);
             }
-            cambiaPuntuaciones();
         }
     };
-    private void cambiaPuntuaciones()
-    {
-        TextView textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
-        TextView textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
-        Button boton;
-        //TODO hacer un contador para mirar el texto y cambiarlo en el TextView
-        for (int i = 0; i < TAM*TAM;i++)
-        {
-            if (botonTAG==0)
-            {
 
-            }
-        }
-
-    }
     public void onClick(View v) {
         if (v.getId() == R.id.jugar) {
             //llamar a juego
@@ -144,27 +150,30 @@ public class principal extends AppCompatActivity {
 
         }
     }
-    /*public boolean casillaPermitida(int i, int j, int dir)
+    public boolean casillaPermitida(Button v)
     {
-        NO
+        int i=1,j=10;
+        int tag = (int)(v.getTag());
+
+        if (Button)//NO
         {
             i-=1;
             j-=1;
         }
-        N
+        if (Button)//N
         {
             j -=1;
         }
-        NE
+        if (Button)//NE
         {
             j-=1;
             i+=1;
         }
-        E
+        if (Button) //E
         {
             i+=1;
         }
-        SE
+        if (Button)SE
         {
             i+=1;
             j+=1;
