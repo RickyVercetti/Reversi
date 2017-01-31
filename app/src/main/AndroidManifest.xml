@@ -15,7 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".juego"></activity>
+        <activity android:name=".juego" />
+        <activity android:name=".menuInicio" />
+        <activity android:name=".instrucciones" />
+        <activity android:name=".puntuaciones"></activity>
     </application>
 
 </manifest>

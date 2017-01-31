@@ -27,7 +27,7 @@ public class principal extends AppCompatActivity {
     private static int TAM = 8;
     private boolean turno;
 
-    private static int botonTAG = 0;
+    private static int botonTAG = 1;
     //TODO linea para insertar vibración, falta insertar en el manifest
     //Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     //vibrator.vibrate(100); //Dentro del click
@@ -48,6 +48,7 @@ public class principal extends AppCompatActivity {
         configuracion.setMargins(0,0,0,0);
         configuracion.weight=1;
         Button boton;
+        //Creación de los botones
         for (int i = 0; i < TAM; i++) {
             LinearLayout filabotones = new LinearLayout(this);
             filabotones.setOrientation(LinearLayout.HORIZONTAL);
@@ -104,9 +105,10 @@ public class principal extends AppCompatActivity {
     {
         public void onClick(View v)
         {
+            //TODO compruebo que la casilla está vacia
             if (((Button)v).getText().equals(""))
             {
-                Object tag = ((Button)v).getTag();
+                //Object tag = ((Button)v).getTag();
                 if ((casillaPermitida((Button)v)))
                 {
                     if (turno==true)
@@ -140,7 +142,7 @@ public class principal extends AppCompatActivity {
         }
     };
 
-    public void onClick(View v) {
+    /*public void onClick(View v) {
         if (v.getId() == R.id.jugar) {
             //llamar a juego
             //TODO hacer que funcione el toast y llevar a la pantalla juego
@@ -149,54 +151,57 @@ public class principal extends AppCompatActivity {
 
 
         }
-    }
+    }*/
     public boolean casillaPermitida(Button v)
     {
-        int i=1,j=10;
+        //int i=1,j=10;
+        //TODO compruebo cual es la casilla pulsada
         int tag = (int)(v.getTag());
+        //TODO restringido zona superior izquierda
+        if (tag == 1)
+        {
 
-        if (Button)//NO
-        {
-            i-=1;
-            j-=1;
         }
-        if (Button)//N
+        //TODO restringido la zona superior para que no se salga
+        if (tag > 1 && tag < TAM-1)
         {
-            j -=1;
+
         }
-        if (Button)//NE
+        //TODO restringido la zona superior derecha del panel
+        if (tag == TAM)
         {
-            j-=1;
-            i+=1;
+
         }
-        if (Button) //E
+        //TODO restringido la zona izquierda
+        if (tag > TAM && tag < (TAM*TAM)-TAM && (tag-1)%TAM == 0)
         {
-            i+=1;
+
         }
-        if (Button)SE
+        //TODO restringido la zona derecha
+        if (tag > TAM && tag < (TAM*TAM)-(TAM-1) && tag%TAM==0)
         {
-            i+=1;
-            j+=1;
+
         }
-        S
+        //TODO restringido la esquina inferior derecha
+        if (tag == (TAM*TAM-1)+1)
         {
-            j+=1;
+
         }
-        SO
+        //TODO restringido la parte inferior
+        if (tag > (TAM*TAM)+1 && tag < (TAM*TAM)-1)
         {
-            j+=1;
-            i-=1;
+
         }
-        O
-        {
-            i-=1;
+        else {
+
         }
 
 
+        return true;
     }
 
     public boolean buscarCasillaDireccion()
     {
-
-    }*/
+    return true;
+    }
 }
