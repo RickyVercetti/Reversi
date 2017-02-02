@@ -42,28 +42,21 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="106dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.01"
-                android:gravity="center_vertical">
-
-                <Button
-                    android:text="Jugar"
-                    android:layout_width="75dp"
-                    android:layout_height="45dp"
-                    android:id="@+id/button2"
-                    android:layout_weight="0.47"
-                    android:textStyle="normal|bold"
-                    android:fontFamily="casual"
-                    android:textSize="24sp"
-                    android:textAlignment="center"
-                    android:onClick="btn_jugarOnClick"
-                    android:background="@color/colorPrimary" />
-            </LinearLayout>
+            <Button
+                android:text="Jugar"
+                android:id="@+id/button2"
+                android:layout_weight="0.16"
+                android:textStyle="normal|bold"
+                android:fontFamily="casual"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:onClick="btn_jugarOnClick"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
 
         </LinearLayout>
     </LinearLayout>
