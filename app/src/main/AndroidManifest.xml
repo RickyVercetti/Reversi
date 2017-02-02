@@ -8,16 +8,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".menuInicio">
+        <activity android:name=".inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".principal" />
+        <activity android:name=".juego" />
         <activity android:name=".instrucciones" />
-        <activity android:name=".puntuaciones"></activity>
+        <activity android:name=".puntuaciones" />
+        <activity android:name=".acerca"></activity>
     </application>
 
 </manifest>

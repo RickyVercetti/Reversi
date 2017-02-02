@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.reversi.ricardo.campos.reversi.menuInicio"
+    tools:context="com.reversi.ricardo.campos.reversi.inicio"
     android:background="@color/Background">
 
     <LinearLayout
@@ -53,8 +53,8 @@
 
                 <Button
                     android:text="Jugar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="75dp"
+                    android:layout_height="45dp"
                     android:id="@+id/button2"
                     android:layout_weight="0.47"
                     android:textStyle="normal|bold"

@@ -1,0 +1,68 @@
+package com.reversi.ricardo.campos.reversi;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+public class inicio extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_inicio);
+    }
+
+
+    public void btn_jugarOnClick(View view) {
+
+        Intent intent = new Intent(this, juego.class);
+        startActivity(intent);
+    }
+
+
+    /*
+    public void btn_instruccionesOnClick(View view) {
+
+        Intent intent = new Intent(this, instrucciones.class);
+        startActivity(intent);
+    }
+
+    public void btn_puntuacionesOnClick(View view) {
+
+        Intent intent = new Intent(this, puntuaciones.class);
+        startActivity(intent);
+    }
+    */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_inicio, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.acerca)
+        {
+            Intent intent = new Intent(this, acerca.class);
+            startActivity(intent);
+            /*Toast.makeText(getApplicationContext(), "Somos los mejores programadores del mundo!!", Toast.LENGTH_LONG).show();
+            return true;*/
+        }
+        else if (id == R.id.instrucciones)
+        {
+            Intent intent = new Intent(this, instrucciones.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.puntuaciones)
+        {
+            Intent intent = new Intent(this, puntuaciones.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

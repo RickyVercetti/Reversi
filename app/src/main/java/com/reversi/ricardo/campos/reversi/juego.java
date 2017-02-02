@@ -1,12 +1,7 @@
 package com.reversi.ricardo.campos.reversi;
 
-import android.content.Context;
-import android.nfc.Tag;
-import android.os.Vibrator;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -15,13 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import static com.reversi.ricardo.campos.reversi.R.id.dinamico;
-
-public class principal extends AppCompatActivity {
+public class juego extends AppCompatActivity {
 
 
     private static int TAM = 8;
@@ -98,7 +88,7 @@ public class principal extends AppCompatActivity {
     };*/
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        getMenuInflater().inflate(R.menu.menu_juego, menu);
         return true;
     }
     private View.OnClickListener casillaJuego = new View.OnClickListener()
