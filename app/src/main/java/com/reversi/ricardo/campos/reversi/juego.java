@@ -15,20 +15,18 @@ public class juego extends AppCompatActivity {
 
 
     private static int TAM = 8;
-    private boolean turno;
-
+    private boolean turnoJugador;
     private static int botonTAG = 1;
-    //TODO linea para insertar vibración, falta insertar en el manifest
-    //Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    //vibrator.vibrate(100); //Dentro del click
+
+    TextView textoJugador = null;
+    TextView textoMaquina = null;
+
+    Button boton = null;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //llamar a juego
-        //TODO hacer que cambie de un activity a otro con un Intent
-        //Toast.makeText(this, "A Jugar!", Toast.LENGTH_SHORT).show();
-
+        //Creamos el Layout dinámico
         LayoutInflater inflater = LayoutInflater.from(this);
         RelativeLayout layout_secundario = (RelativeLayout) inflater.inflate(R.layout.activity_juego, null, false);
         LinearLayout dinamico = (LinearLayout) layout_secundario.findViewById(R.id.dinamico);
@@ -37,7 +35,7 @@ public class juego extends AppCompatActivity {
         LinearLayout.LayoutParams configuracion = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         configuracion.setMargins(0,0,0,0);
         configuracion.weight=1;
-        Button boton;
+
         //Creación de los botones
         for (int i = 0; i < TAM; i++) {
             LinearLayout filabotones = new LinearLayout(this);
@@ -45,7 +43,7 @@ public class juego extends AppCompatActivity {
             int mitad = TAM/2;
             filabotones.setLayoutParams(configuracion);
             for (int j = 0; j < TAM; j++) {
-                boton  = new Button(this);
+                Button boton  = new Button(this); //TODO corregir la creación de botones
                 boton.setTag(botonTAG);
                 tableroInicial(i,j,mitad,boton);
                 boton.setLayoutParams(configuracion);
@@ -58,90 +56,73 @@ public class juego extends AppCompatActivity {
         }
         setContentView(layout_secundario);
     }
+
     public void tableroInicial(int i, int j,int mitad,Button boton)
     {
-        turno = true;
+        turnoJugador = true;
 
         if (j == mitad && i == mitad)
         {
-            boton.setText("X");
+            boton.setText("J");
         }
-        if (j == mitad-1 && i ==mitad-1)
+        if (j == mitad-1 && i == mitad-1)
         {
-            boton.setText("X");
+            boton.setText("J");
         }
         if (j == mitad && i == mitad-1)
         {
-            boton.setText("O");
+            boton.setText("M");
         }
         if (j ==mitad-1 && i == mitad)
         {
-            boton.setText("O");
+            boton.setText("M");
         }
-    }
-    /*public View.OnClickListener botonesJuego = new View.OnClickListener()
-    {
-        public void onClick(View v)
-        {
-            ((Button) v).setText("X");
-        }
-    };*/
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_juego, menu);
-        return true;
     }
+
     private View.OnClickListener casillaJuego = new View.OnClickListener()
     {
         public void onClick(View v)
         {
-            //TODO compruebo que la casilla está vacia
-            if (((Button)v).getText().equals(""))
-            {
-                //Object tag = ((Button)v).getTag();
-                if ((casillaPermitida((Button)v)))
-                {
-                    if (turno==true)
-                    {
-                        ((Button)v).setText("X");
-                        turno=false;
-                    }
-                    else
-                    {
-                        ((Button) v).setText("O");
-                        turno = true;
-                    }
-                }
-                //TODO metemos el contador de puntuaciones
-                TextView textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
-                TextView textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
-                int contadorMaquina = 0;
-                int contadorJugador = 0;
-                for (int i = 0; i < TAM;i++) {
-                    for (int j = 0; j < TAM; j++) {
-                        if (((Button) v).getText() == "X") {
-                            contadorJugador++;
-                        }else{
-                            contadorMaquina++;
-                        }
-                    }
-                }
-                textoJugador.setText(contadorJugador);
-                textoMaquina.setText(contadorMaquina);
-            }
+            casillaPulsada(v);
+
         }
     };
 
-    /*public void onClick(View v) {
-        if (v.getId() == R.id.jugar) {
-            //llamar a juego
-            //TODO hacer que funcione el toast y llevar a la pantalla juego
-            Toast.makeText(this, "A Jugar!", Toast.LENGTH_SHORT).show();
+    private void casillaPulsada(View v) {
+
+        if (((Button)v).getText().equals(""))
+        {
+            if ((casillaPermitida((Button)v))) //TODO 2. Comprobamos que la casilla está permitida
+            {
+
+            }
 
 
 
+            //Object tag = ((Button)v).getTag();
+
+            //TODO metemos el contador de puntuaciones
+            textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
+            textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
+            int contadorMaquina = 0;
+            int contadorJugador = 0;
+            for (int i = 0; i < TAM;i++) {
+                for (int j = 0; j < TAM; j++) {
+                    if (((Button) v).getText() == "X") {
+                        contadorJugador++;
+                    }else if(((Button)v).getText() == "O"){
+                        contadorMaquina++;
+                    }else{
+
+                    }
+                }
+            }
+            textoJugador.setText(contadorJugador);
+            textoMaquina.setText(contadorMaquina);
         }
-    }*/
+    }
+
     public boolean casillaPermitida(Button v)
     {
         //int i=1,j=10;
@@ -150,7 +131,19 @@ public class juego extends AppCompatActivity {
         //TODO restringido zona superior izquierda
         if (tag == 1)
         {
-
+            if (v.getTag() == "J")
+            {
+                if (turnoJugador == true)
+                {
+                    ((Button)v).setText("J");
+                    turnoJugador = false;
+                }
+                else
+                {
+                    ((Button) v).setText("O");
+                    turnoJugador = true;
+                }
+            }
         }
         //TODO restringido la zona superior para que no se salga
         if (tag > 1 && tag < TAM-1)
@@ -193,5 +186,10 @@ public class juego extends AppCompatActivity {
     public boolean buscarCasillaDireccion()
     {
     return true;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_juego, menu);
+        return true;
     }
 }

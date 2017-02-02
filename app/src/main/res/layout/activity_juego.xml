@@ -28,14 +28,15 @@
                 android:layout_height="58dp">
 
                 <TextView
-                    android:text="Ricardo"
+                    android:text="Jugador"
                     android:layout_height="match_parent"
                     android:id="@+id/jugador"
                     android:layout_weight="0.89"
                     android:gravity="center"
                     android:layout_width="55dp"
                     android:textSize="18sp"
-                    android:textStyle="normal|bold" />
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/background_light" />
 
                 <TextView
                     android:text="Maquina"
@@ -45,7 +46,8 @@
                     android:layout_weight="0.91"
                     android:gravity="center"
                     android:textSize="18sp"
-                    android:textStyle="normal|bold" />
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/background_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -54,22 +56,26 @@
                 android:layout_height="58dp">
 
                 <TextView
-                    android:text="0"
+                    android:text="2"
                     android:layout_width="55dp"
                     android:layout_height="match_parent"
                     android:id="@+id/puntuacionJugador"
                     android:layout_weight="0.97"
                     android:gravity="top|center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@android:color/background_light"
+                    android:textStyle="normal|bold" />
 
                 <TextView
-                    android:text="0"
+                    android:text="2"
                     android:layout_width="55dp"
                     android:layout_height="match_parent"
                     android:id="@+id/puntuacionMaquina"
                     android:layout_weight="1"
                     android:gravity="top|center"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@android:color/background_dark"
+                    android:textStyle="normal|bold" />
             </LinearLayout>
         </LinearLayout>
 
