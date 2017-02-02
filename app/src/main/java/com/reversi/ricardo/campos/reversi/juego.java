@@ -14,14 +14,14 @@ import android.widget.TextView;
 public class juego extends AppCompatActivity {
 
 
-    private static int TAM = 8;
+    private static int TAM = 6;
     private boolean turnoJugador;
     private static int botonTAG = 1;
 
     TextView textoJugador = null;
     TextView textoMaquina = null;
 
-    Button boton = null;
+    Button boton[][] = null;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +43,12 @@ public class juego extends AppCompatActivity {
             int mitad = TAM/2;
             filabotones.setLayoutParams(configuracion);
             for (int j = 0; j < TAM; j++) {
-                Button boton  = new Button(this); //TODO corregir la creación de botones
-                boton.setTag(botonTAG);
-                tableroInicial(i,j,mitad,boton);
-                boton.setLayoutParams(configuracion);
-                filabotones.addView(boton);
-                boton.setOnClickListener(casillaJuego);
+                boton[i][j]  = new Button(this); //TODO corregir la creación de botones
+                boton[i][j].setTag(botonTAG);
+                tableroInicial(i,j,mitad,boton[i][j]);
+                boton[i][j].setLayoutParams(configuracion);
+                filabotones.addView(boton[i][j]);
+                boton[i][j].setOnClickListener(casillaJuego);
                 //casillaPermitida(i,j,botonTAG);
                 botonTAG++;
             }
@@ -57,25 +57,25 @@ public class juego extends AppCompatActivity {
         setContentView(layout_secundario);
     }
 
-    public void tableroInicial(int i, int j,int mitad,Button boton)
+    public void tableroInicial(int i, int j,int mitad,Button v)
     {
         turnoJugador = true;
 
         if (j == mitad && i == mitad)
         {
-            boton.setText("J");
+            v.setText("J");
         }
         if (j == mitad-1 && i == mitad-1)
         {
-            boton.setText("J");
+            v.setText("J");
         }
         if (j == mitad && i == mitad-1)
         {
-            boton.setText("M");
+            v.setText("M");
         }
         if (j ==mitad-1 && i == mitad)
         {
-            boton.setText("M");
+            v.setText("M");
         }
 
     }
@@ -109,9 +109,9 @@ public class juego extends AppCompatActivity {
             int contadorJugador = 0;
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
-                    if (((Button) v).getText() == "X") {
+                    if (((Button) v).getText() == "J") {
                         contadorJugador++;
-                    }else if(((Button)v).getText() == "O"){
+                    }else if(((Button)v).getText() == "M"){
                         contadorMaquina++;
                     }else{
 
@@ -125,25 +125,21 @@ public class juego extends AppCompatActivity {
 
     public boolean casillaPermitida(Button v)
     {
+
         //int i=1,j=10;
         //TODO compruebo cual es la casilla pulsada
         int tag = (int)(v.getTag());
         //TODO restringido zona superior izquierda
-        if (tag == 1)
-        {
-            if (v.getTag() == "J")
-            {
-                if (turnoJugador == true)
-                {
-                    ((Button)v).setText("J");
-                    turnoJugador = false;
-                }
-                else
-                {
-                    ((Button) v).setText("O");
-                    turnoJugador = true;
-                }
+        if (tag == 1) {
+
+            if (turnoJugador == true) {
+                v.setText("J");
+                turnoJugador = false;
+            } else {
+                v.setText("O");
+                turnoJugador = true;
             }
+
         }
         //TODO restringido la zona superior para que no se salga
         if (tag > 1 && tag < TAM-1)
@@ -176,7 +172,16 @@ public class juego extends AppCompatActivity {
 
         }
         else {
-
+            if (turnoJugador == true)
+            {
+                v.setText("J");
+                turnoJugador = false;
+            }
+            else
+            {
+                v.setText("O");
+                turnoJugador = true;
+            }
         }
 
 

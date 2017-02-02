@@ -12,8 +12,10 @@ public class inicio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getResources().getString(R.string.txt_labelApp).concat("que te peten");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
+
     }
 
 
