@@ -5,9 +5,13 @@
         <item name="2">Normal</item>
         <item name="3">Muchas</item>
     </string-array>
-    <integer-array name="tamTableroValue">
+    <string-array name="tamTableroValue">
         <item name="1">6</item>
         <item name="2">8</item>
         <item name="3">10</item>
-    </integer-array>
+    </string-array>
+    <string-array name="dificultad">
+        <item name="1">Normal</item>
+        <item name="2">Experto</item>
+    </string-array>
 </resources>

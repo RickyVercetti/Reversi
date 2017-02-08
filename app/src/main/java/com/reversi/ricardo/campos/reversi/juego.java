@@ -18,11 +18,12 @@ public class juego extends AppCompatActivity {
 
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-
-    private int TAM = sharedPreferences.getInt("tamTablero",8);
+    private int TAM = Integer.parseInt(sharedPreferences.getString("tamTablero","8"));
     private boolean turnoJugador;
     private boolean ayuda = sharedPreferences.getBoolean("ayuda",false);
     private static int botonTAG = 1;
+
+    private String dificultad = sharedPreferences.getString("dificultad","Normal");
 
     TextView textoJugador = null;
     TextView textoMaquina = null;
