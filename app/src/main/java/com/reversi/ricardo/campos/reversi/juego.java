@@ -95,6 +95,26 @@ public class juego extends AppCompatActivity {
         }
     };
 
+    private void buscarCasillasPermitidas()
+    {
+        for (int i=0;i<TAM;i++)
+        {
+            for (int j=0;j<TAM;j++)
+            {
+                if (boton[i][j].getText()!="")
+                {
+                    if (boton[i][j].getText()=="J")
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+        }
+    }
     private void casillaPulsada(View v) {
 
         if (((Button)v).getText().equals(""))
@@ -131,8 +151,6 @@ public class juego extends AppCompatActivity {
 
     public boolean casillaPermitida(Button v)
     {
-
-        //int i=1,j=10;
         //TODO compruebo cual es la casilla pulsada
         int tag = (int)(v.getTag());
         //TODO restringido zona superior izquierda
