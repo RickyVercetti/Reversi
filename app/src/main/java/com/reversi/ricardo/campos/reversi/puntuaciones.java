@@ -19,9 +19,9 @@ public class puntuaciones extends AppCompatActivity {
 
         if (db != null)
         {
-            Cursor c = db.rawQuery("SELECT puntuacion AS _id,puntuacion,fecha FROM puntuaciones ORDER BY puntuacion DESC",null);
-            String[] columna = new String[] {"puntuacion","fecha"};
-            int[] col = new int[] {R.id.textPunto,R.id.textFecha};
+            Cursor c = db.rawQuery("SELECT puntuacion AS _id,nom,puntuacion,fecha FROM puntuaciones ORDER BY puntuacion DESC",null);
+            String[] columna = new String[] {"nom","puntuacion","fecha"};
+            int[] col = new int[] {R.id.textNombre,R.id.textPunto,R.id.textFecha};
             SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(this, R.layout.tablapuntuaciones, c, columna, col,0);
             ListView list = (ListView)findViewById(R.id.lista);
             list.setAdapter(mAdapter);

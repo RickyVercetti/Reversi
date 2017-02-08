@@ -18,7 +18,8 @@
         <activity android:name=".juego" />
         <activity android:name=".instrucciones" />
         <activity android:name=".puntuaciones" />
-        <activity android:name=".acerca"></activity>
+        <activity android:name=".acerca" />
+        <activity android:name=".preferencias"></activity>
     </application>
 
 </manifest>

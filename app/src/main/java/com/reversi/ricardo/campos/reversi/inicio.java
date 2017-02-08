@@ -12,12 +12,11 @@ public class inicio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getResources().getString(R.string.txt_labelApp).concat("que te peten");
+        //getResources().getString(R.string.txt_labelApp).concat("que te peten");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
     }
-
 
     public void btn_jugarOnClick(View view) {
 
@@ -25,20 +24,6 @@ public class inicio extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    /*
-    public void btn_instruccionesOnClick(View view) {
-
-        Intent intent = new Intent(this, instrucciones.class);
-        startActivity(intent);
-    }
-
-    public void btn_puntuacionesOnClick(View view) {
-
-        Intent intent = new Intent(this, puntuaciones.class);
-        startActivity(intent);
-    }
-    */
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_inicio, menu);
         return true;
@@ -52,8 +37,6 @@ public class inicio extends AppCompatActivity {
         {
             Intent intent = new Intent(this, acerca.class);
             startActivity(intent);
-            /*Toast.makeText(getApplicationContext(), "Somos los mejores programadores del mundo!!", Toast.LENGTH_LONG).show();
-            return true;*/
         }
         else if (id == R.id.instrucciones)
         {
@@ -63,6 +46,11 @@ public class inicio extends AppCompatActivity {
         else if (id == R.id.puntuaciones)
         {
             Intent intent = new Intent(this, puntuaciones.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.preferencias)
+        {
+            Intent intent = new Intent(this, preferencias.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

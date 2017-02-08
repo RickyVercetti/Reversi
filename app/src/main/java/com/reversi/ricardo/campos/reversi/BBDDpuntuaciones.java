@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BBDDpuntuaciones extends SQLiteOpenHelper{
 
-    String sqlCreate = "CREATE TABLE puntuaciones (puntuacion TEXT, fecha TEXT)";
+    String sqlCreate = "CREATE TABLE puntuaciones (nom TEXT, puntuacion TEXT, fecha TEXT)";
 
     public BBDDpuntuaciones(Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version)
     {
@@ -22,15 +22,15 @@ public class BBDDpuntuaciones extends SQLiteOpenHelper{
         db.execSQL(sqlCreate);
         if (db != null)
         {
-            db.execSQL("INSERT INTO puntuaciones (puntuacion,fecha) VALUES ('20','03-02-2017')");
-            db.execSQL("INSERT INTO puntuaciones (puntuacion,fecha) VALUES ('25','01-02-2017')");
+            db.execSQL("INSERT INTO puntuaciones (nom,puntuacion,fecha) VALUES ('Elon','20','03-02-2017')");
+            db.execSQL("INSERT INTO puntuaciones (nom,puntuacion,fecha) VALUES ('Ricardo','30','01-02-2017')");
         }
     }
 
     public void onUpgrade(SQLiteDatabase db, int versionAnterior, int versionNueva)
     {
         db.execSQL("DROP TABLE IF EXISTS puntuaciones");
-        db. execSQL(sqlCreate);
+        db.execSQL(sqlCreate);
     }
 
 }

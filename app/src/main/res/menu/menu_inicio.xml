@@ -10,4 +10,7 @@
     <item
         android:id="@+id/puntuaciones"
         android:title="Puntuaciones"/>
+    <item
+        android:id="@+id/preferencias"
+        android:title="Preferencias"/>
 </menu>

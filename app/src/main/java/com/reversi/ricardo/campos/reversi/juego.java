@@ -1,5 +1,7 @@
 package com.reversi.ricardo.campos.reversi;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +16,12 @@ import android.widget.TextView;
 public class juego extends AppCompatActivity {
 
 
-    private static int TAM = 6;
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+    private int TAM = sharedPreferences.getInt("tamTablero",8);
     private boolean turnoJugador;
+    private boolean ayuda = sharedPreferences.getBoolean("ayuda",false);
     private static int botonTAG = 1;
 
     TextView textoJugador = null;
@@ -57,8 +63,7 @@ public class juego extends AppCompatActivity {
         setContentView(layout_secundario);
     }
 
-    public void tableroInicial(int i, int j,int mitad,Button v)
-    {
+    public void tableroInicial(int i, int j,int mitad,Button v) {
         turnoJugador = true;
 
         if (j == mitad && i == mitad)
