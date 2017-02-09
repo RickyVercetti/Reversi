@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tamTablero">
-        <item name="1">Pocas</item>
+        <item name="1">Pequeño</item>
         <item name="2">Normal</item>
-        <item name="3">Muchas</item>
+        <item name="3">Grande</item>
     </string-array>
     <string-array name="tamTableroValue">
         <item name="1">6</item>

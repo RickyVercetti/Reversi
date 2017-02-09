@@ -17,18 +17,15 @@ public class juego extends AppCompatActivity {
 
 
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
     private int TAM = Integer.parseInt(sharedPreferences.getString("tamTablero","8"));
-    private boolean turnoJugador;
     private boolean ayuda = sharedPreferences.getBoolean("ayuda",false);
-    private static int botonTAG = 1;
-
     private String dificultad = sharedPreferences.getString("dificultad","Normal");
 
+    Button boton[][] = null;
     TextView textoJugador = null;
     TextView textoMaquina = null;
-
-    Button boton[][] = null;
+    private boolean turnoJugador;
+    private static int botonTAG = 1;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +60,6 @@ public class juego extends AppCompatActivity {
         }
         setContentView(layout_secundario);
     }
-
     public void tableroInicial(int i, int j,int mitad,Button v) {
         turnoJugador = true;
 
@@ -83,44 +79,22 @@ public class juego extends AppCompatActivity {
         {
             v.setText("M");
         }
-
+        buscarCasillasPermitidas();
     }
-
-    private View.OnClickListener casillaJuego = new View.OnClickListener()
-    {
+    private View.OnClickListener casillaJuego = new View.OnClickListener() {
         public void onClick(View v)
         {
             casillaPulsada(v);
-
+            buscarCasillasPermitidas();
         }
     };
 
-    private void buscarCasillasPermitidas()
-    {
-        for (int i=0;i<TAM;i++)
-        {
-            for (int j=0;j<TAM;j++)
-            {
-                if (boton[i][j].getText()!="")
-                {
-                    if (boton[i][j].getText()=="J")
-                    {
 
-                    }
-                    else
-                    {
 
-                    }
-                }
-            }
-        }
-    }
     private void casillaPulsada(View v) {
 
-        if (((Button)v).getText().equals(""))
+        if (((Button)v).getText().equals("P"))
         {
-            if ((casillaPermitida((Button)v))) //TODO 2. Comprobamos que la casilla está permitida
-            {
 
             }
 
@@ -147,74 +121,177 @@ public class juego extends AppCompatActivity {
             textoJugador.setText(contadorJugador);
             textoMaquina.setText(contadorMaquina);
         }
+    private void buscarCasillasPermitidas() {
+        for (int i=0;i<TAM;i++)
+        {
+            for (int j=0;j<TAM;j++)
+            {
+                if (boton[i][j].getText()=="") {
+
+                    NO(boton, i, j, turnoJugador);
+                    N(boton, i, j, turnoJugador);
+                    NE(boton, i, j, turnoJugador);
+                    O(boton, i, j, turnoJugador);
+                    E(boton, i, j, turnoJugador);
+                    SO(boton, i, j, turnoJugador);
+                    S(boton, i, j, turnoJugador);
+                    SE(boton, i, j, turnoJugador);
+                }
+            }
+        }
     }
 
-    public boolean casillaPermitida(Button v)
-    {
-        //TODO compruebo cual es la casilla pulsada
-        int tag = (int)(v.getTag());
-        //TODO restringido zona superior izquierda
-        if (tag == 1) {
+    private void NO(Button boton[][],int i, int j,boolean turnoJugador) {
 
-            if (turnoJugador == true) {
-                v.setText("J");
-                turnoJugador = false;
-            } else {
-                v.setText("O");
-                turnoJugador = true;
-            }
-
-        }
-        //TODO restringido la zona superior para que no se salga
-        if (tag > 1 && tag < TAM-1)
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
         {
-
-        }
-        //TODO restringido la zona superior derecha del panel
-        if (tag == TAM)
-        {
-
-        }
-        //TODO restringido la zona izquierda
-        if (tag > TAM && tag < (TAM*TAM)-TAM && (tag-1)%TAM == 0)
-        {
-
-        }
-        //TODO restringido la zona derecha
-        if (tag > TAM && tag < (TAM*TAM)-(TAM-1) && tag%TAM==0)
-        {
-
-        }
-        //TODO restringido la esquina inferior derecha
-        if (tag == (TAM*TAM-1)+1)
-        {
-
-        }
-        //TODO restringido la parte inferior
-        if (tag > (TAM*TAM)+1 && tag < (TAM*TAM)-1)
-        {
-
-        }
-        else {
-            if (turnoJugador == true)
+            boton[i][j] = boton[i-1][j-1];
+            if (i<0 || j<0)
             {
-                v.setText("J");
-                turnoJugador = false;
+                break;
             }
-            else
-            {
-                v.setText("O");
-                turnoJugador = true;
-            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
         }
-
-
-        return true;
     }
+    private void N(Button boton[][],int i, int j,boolean turnoJugador) {
 
-    public boolean buscarCasillaDireccion()
-    {
-    return true;
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i-1][j];
+            if (i<0)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
+    }
+    private void NE(Button boton[][],int i, int j,boolean turnoJugador) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i+1][j+1];
+            if (i<0 || j>TAM)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
+    }
+    private void O(Button boton[][],int i, int j,boolean turnoJugador) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i][j-1];
+            if (j<0)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
+    }
+    private void E(Button boton[][],int i, int j,boolean turnoJugador) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i][j+1];
+            if ( j>TAM)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
+    }
+    private void SO(Button boton[][],int i, int j,boolean turnoJugador) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i+1][j-1];
+            if (i>TAM || j<0)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
+    }
+    private void S(Button boton[][],int i, int j,boolean turnoJugador) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i+1][j];
+            if (i>TAM)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
+    }
+    private void SE(Button boton[][],int i, int j,boolean turnoJugador) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        do
+        {
+            boton[i][j] = boton[i+1][j+1];
+            if (i>TAM || j>TAM)
+            {
+                break;
+            }
+        }while (boton[i][j].getText()==fichacontraria);
+        if (boton[i][j].getText()==fichapropia)
+        {
+            boton[i][j].setText("P");
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
