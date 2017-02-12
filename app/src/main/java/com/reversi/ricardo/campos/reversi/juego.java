@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class juego extends AppCompatActivity {
 
@@ -50,25 +51,37 @@ public class juego extends AppCompatActivity {
         for (int i = 0; i < TAM; i++) {
             LinearLayout filabotones = new LinearLayout(this);
             filabotones.setOrientation(LinearLayout.HORIZONTAL);
-            int mitad = TAM/2;
+
             filabotones.setLayoutParams(configuracion);
             for (int j = 0; j < TAM; j++) {
                 boton[i][j]  = new Button(this); //TODO corregir la creación de botones
                 boton[i][j].setTag(botonTAG);
-                boton[i][j].setText(" ");
-
+                boton[i][j].setText("");
                 boton[i][j].setLayoutParams(configuracion);
                 filabotones.addView(boton[i][j]);
                 boton[i][j].setOnClickListener(casillaJuego);
-                tableroInicial(i,j,mitad,boton[i][j]);
+
                 //casillaPermitida(i,j,botonTAG);
                 botonTAG++;
             }
             dinamico.addView(filabotones);
         }
         setContentView(layout_secundario);
+        tableroInicial();
     }
-    public void tableroInicial(int i, int j,int mitad,Button v) {
+    public void tableroInicial()
+    {
+        turnoJugador = true;
+
+        int mitad = TAM/2;
+
+        boton[mitad][mitad].setText("J");
+        boton[mitad-1][mitad-1].setText("J");
+        boton[mitad][mitad-1].setText("M");
+        boton[mitad-1][mitad].setText("M");
+        buscarCasillasPermitidas();
+    }
+    /*public void tableroInicial(int i, int j,int mitad,Button v) {
         turnoJugador = true;
 
         if (j == mitad && i == mitad)
@@ -87,8 +100,8 @@ public class juego extends AppCompatActivity {
         {
             v.setText("M");
         }
-        buscarCasillasPermitidas();
-    }
+        //buscarCasillasPermitidas();
+    }*/
     private View.OnClickListener casillaJuego = new View.OnClickListener() {
         public void onClick(View v)
         {
@@ -104,39 +117,48 @@ public class juego extends AppCompatActivity {
         if (((Button)v).getText().equals("P"))
         {
 
+            textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
+            textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
+            int contadorMaquina = 0;
+            int contadorJugador = 0;
+            for (int i = 0; i < TAM;i++) {
+                for (int j = 0; j < TAM; j++) {
+                    if (boton[i][j].getText() == "J") {
+                        contadorJugador++;
+                    }
+                    if(boton[i][j].getText() == "M"){
+                        contadorMaquina++;
+                    }else{
+                        casillasVacias++;
+                    }
+                }
+            }
+            textoJugador.setText(String.valueOf(contadorJugador));
+            textoMaquina.setText(String.valueOf(contadorMaquina));
+            if (casillasVacias==0)
+            {
+
+            }
+        }
+        if (((Button)v).getText().equals("J") || ((Button)v).getText().equals("M"))
+        {
+            Toast.makeText(this, "Aquí ya ahí una ficha!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(this, "Aquí no puedes!", Toast.LENGTH_SHORT).show();
         }
 
 
         //TODO metemos el contador de puntuaciones
-        textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
-        textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
-        int contadorMaquina = 0;
-        int contadorJugador = 0;
-        for (int i = 0; i < TAM;i++) {
-            for (int j = 0; j < TAM; j++) {
-                if (((Button) v).getText() == "J") {
-                    contadorJugador++;
-                }
-                if(((Button)v).getText() == "M"){
-                    contadorMaquina++;
-                }else{
-                    casillasVacias++;
-                }
-            }
-        }
-        textoJugador.setText(String.valueOf(contadorJugador));
-        textoMaquina.setText(String.valueOf(contadorMaquina));
-        if (casillasVacias==0)
-        {
 
-        }
         }
     private void buscarCasillasPermitidas() {
         for (int i=0;i<TAM;i++)
         {
             for (int j=0;j<TAM;j++)
             {
-                if (boton[i][j].getText()==" ") {
+                if (boton[i][j].getText()=="") {
 
                     NO(boton, i, j, turnoJugador);
                     N(boton, i, j, turnoJugador);
