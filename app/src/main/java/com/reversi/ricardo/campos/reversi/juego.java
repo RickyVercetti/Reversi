@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -161,13 +162,21 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText()=="") {
 
                     NO(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","NO - i="+i+" j="+j);
                     N(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","N - i="+i+" j="+j);
                     NE(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","NE - i="+i+" j="+j);
                     O(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","O - i="+i+" j="+j);
                     E(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","E - i="+i+" j="+j);
                     SO(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","SO - i="+i+" j="+j);
                     S(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","S - i="+i+" j="+j);
                     SE(boton, i, j, turnoJugador);
+                    Log.w("??????????XXX???????","SE - i="+i+" j="+j);
                 }
             }
         }
@@ -177,189 +186,251 @@ public class juego extends AppCompatActivity {
 
         String fichacontraria = null;
         String fichapropia = null;
-
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+        if (i>=2 && j>=2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i-1][j-1].getText()==fichacontraria)
             {
-                break;
+                j--;i--;
+                while(j>=1 || i>=1)
+                {
+                    if (boton[i-1][j-1].getText()==fichacontraria)
+                    {
+                        j--;i--;
+                    }
+                    else if (boton[i-1][j-1].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if (i==0 || j==0)
-            {
-                break;
-            }
-            i--;
-            j--;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void N(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+
+        if (i>=2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i-1][j].getText()==fichacontraria)
             {
-                break;
+                i--;
+                while(i>=1)
+                {
+                    if (boton[i-1][j].getText()==fichacontraria)
+                    {
+                        i--;
+                    }
+                    else if (boton[i-1][j].getText()==fichapropia)
+                    {
+                    boton[iInicial][jInicial].setText("P");
+                    break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if (i==0)
-            {
-                break;
-            }
-            i--;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void NE(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+        if (i>=2 && j<=TAM-2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i-1][j+1].getText()==fichacontraria)
             {
-                break;
+                j++;i--;
+                while(j<=TAM-1 || i>=1)
+                {
+                    if (boton[i-1][j+1].getText()==fichacontraria)
+                    {
+                        j++;i--;
+                    }
+                    else if (boton[i-1][j+1].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if (i==0 || j%TAM==0)
-            {
-                break;
-            }
-            i--;
-            j++;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void O(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+        //TODO Cambiado metodo de busqueda
+        if(j>=2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            j--;//TODO posible quitar
+            if(boton[i][j-1].getText()==fichacontraria)
             {
-                break;
+                while(j>=1)
+                {
+                    if (boton[i][j-1].getText()==fichacontraria)
+                    {
+                        j--;
+                    }
+                    else if (boton[i][j-1].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText(("P"));
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if (j==0)
-            {
-                break;
-            }
-            j--;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void E(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+
+        if (j<=TAM-2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i][j+1].getText()==fichacontraria)
             {
-                break;
+                j++;
+                while(j<=TAM-1)
+                {
+                    if (boton[i][j+1].getText()==fichacontraria)
+                    {
+                        j++;
+                    }
+                    else if (boton[i][j+1].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if ( j%TAM==0)
-            {
-                break;
-            }
-            j++;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void SO(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+        if (i<=TAM-2 && j>=2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i+1][j-1].getText()==fichacontraria)
             {
-                break;
+                j--;i++;
+                while(j>=1 || i<=TAM-1)
+                {
+                    if (boton[i+1][j-1].getText()==fichacontraria)
+                    {
+                        j--;i++;
+                    }
+                    else if (boton[i+1][j-1].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if (i%TAM==0 || j<0)
-            {
-                break;
-            }
-            i++;
-            j--;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void S(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+
+        if (i<=TAM-2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i+1][j].getText()==fichacontraria)
             {
-                break;
+                i++;
+                while(i<=TAM-1)
+                {
+                    if (boton[i+1][j].getText()==fichacontraria)
+                    {
+                        i++;
+                    }
+                    else if (boton[i+1][j].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            if (i==TAM)
-            {
-                break;
-            }
-            i++;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
     private void SE(Button boton[][],int i, int j,boolean turnoJugador) {
 
         String fichacontraria = null;
         String fichapropia = null;
+        int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        do
+        if (i<=TAM-2 && j<=TAM-2)
         {
-            if (boton[i][j].getText()!=fichacontraria)
+            if (boton[i+1][j+1].getText()==fichacontraria)
             {
-                break;
+                j++;i++;
+                while(j<=TAM-1 || i<=TAM-1)
+                {
+                    if (boton[i+1][j+1].getText()==fichacontraria)
+                    {
+                        j++;i++;
+                    }
+                    else if (boton[i+1][j+1].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }else
+                    {
+                        break;
+                    }
+                }
             }
-            if (i>TAM || j==TAM)
-            {
-                break;
-            }
-            i++;
-            j++;
-        }while (boton[i][j].getText()==fichacontraria);
-        if (boton[i][j].getText()==fichapropia)
-        {
-            boton[i][j].setText("P");
         }
     }
 
