@@ -1,6 +1,7 @@
 package com.reversi.ricardo.campos.reversi;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.graphics.Color.GREEN;
 
 public class juego extends AppCompatActivity {
 
@@ -56,7 +59,7 @@ public class juego extends AppCompatActivity {
             filabotones.setLayoutParams(configuracion);
             for (int j = 0; j < TAM; j++) {
                 boton[i][j]  = new Button(this); //TODO corregir la creación de botones
-                boton[i][j].setTag(botonTAG);
+                boton[i][j].setTag(i+""+j);
                 boton[i][j].setText("");
                 boton[i][j].setLayoutParams(configuracion);
                 filabotones.addView(boton[i][j]);
@@ -73,36 +76,42 @@ public class juego extends AppCompatActivity {
     public void tableroInicial()
     {
         turnoJugador = true;
-
         int mitad = TAM/2;
 
+
+        //TODO EN el centro
         boton[mitad][mitad].setText("J");
         boton[mitad-1][mitad-1].setText("J");
         boton[mitad][mitad-1].setText("M");
         boton[mitad-1][mitad].setText("M");
         buscarCasillasPermitidas();
-    }
-    /*public void tableroInicial(int i, int j,int mitad,Button v) {
-        turnoJugador = true;
 
-        if (j == mitad && i == mitad)
-        {
-            v.setText("J");
-        }
-        if (j == mitad-1 && i == mitad-1)
-        {
-            v.setText("J");
-        }
-        if (j == mitad && i == mitad-1)
-        {
-            v.setText("M");
-        }
-        if (j ==mitad-1 && i == mitad)
-        {
-            v.setText("M");
-        }
-        //buscarCasillasPermitidas();
-    }*/
+        /*
+        boton[1][1].setText("J");
+        boton[0][0].setText("J");
+        boton[0][1].setText("M");
+        boton[1][0].setText("M");
+
+        boton[0][TAM-1].setText("J");
+        boton[1][TAM-2].setText("J");
+        boton[0][TAM-2].setText("M");
+        boton[1][TAM-1].setText("M");
+
+        boton[TAM-1][0].setText("J");
+        boton[TAM-2][1].setText("J");
+        boton[TAM-1][1].setText("M");
+        boton[TAM-2][0].setText("M");
+
+        boton[TAM-1][TAM-1].setText("J");
+        boton[TAM-2][TAM-2].setText("J");
+        boton[TAM-1][TAM-2].setText("M");
+        boton[TAM-2][TAM-1].setText("M");
+
+    */
+
+
+    }
+
     private View.OnClickListener casillaJuego = new View.OnClickListener() {
         public void onClick(View v)
         {
@@ -117,6 +126,16 @@ public class juego extends AppCompatActivity {
 
         if (((Button)v).getText().equals("P"))
         {
+            if (turnoJugador==true)
+            {
+                ((Button) v).setText("J");
+                turnoJugador=false;
+            }
+            else
+            {
+                ((Button) v).setText("M");
+                turnoJugador=true;
+            }
 
             textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
             textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
@@ -143,11 +162,11 @@ public class juego extends AppCompatActivity {
         }
         if (((Button)v).getText().equals("J") || ((Button)v).getText().equals("M"))
         {
-            Toast.makeText(this, "Aquí ya ahí una ficha!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Aquí ya ahí una ficha!", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Toast.makeText(this, "Aquí no puedes!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Aquí no puedes!", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -193,7 +212,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i-1][j-1].getText()==fichacontraria)
             {
-                j--;i--;
+                //j--;i--;
                 while(j>=1 || i>=1)
                 {
                     if (boton[i-1][j-1].getText()==fichacontraria)
@@ -225,7 +244,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i-1][j].getText()==fichacontraria)
             {
-                i--;
+                //i--;
                 while(i>=1)
                 {
                     if (boton[i-1][j].getText()==fichacontraria)
@@ -256,7 +275,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i-1][j+1].getText()==fichacontraria)
             {
-                j++;i--;
+                //j++;i--;
                 while(j<=TAM-1 || i>=1)
                 {
                     if (boton[i-1][j+1].getText()==fichacontraria)
@@ -286,18 +305,23 @@ public class juego extends AppCompatActivity {
         //TODO Cambiado metodo de busqueda
         if(j>=2)
         {
-            j--;//TODO posible quitar
+            //j--;//TODO posible quitar
             if(boton[i][j-1].getText()==fichacontraria)
             {
                 while(j>=1)
                 {
+                    if (boton[i][1].getText()==fichacontraria && boton[i][0].getText()==fichapropia)
+                    {
+                        boton[iInicial][jInicial].setText("P");
+                        break;
+                    }
                     if (boton[i][j-1].getText()==fichacontraria)
                     {
                         j--;
                     }
                     else if (boton[i][j-1].getText()==fichapropia)
                     {
-                        boton[iInicial][jInicial].setText(("P"));
+                        boton[iInicial][jInicial].setText("P");
                         break;
                     }
                     else
@@ -320,7 +344,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i][j+1].getText()==fichacontraria)
             {
-                j++;
+                //j++;
                 while(j<=TAM-1)
                 {
                     if (boton[i][j+1].getText()==fichacontraria)
@@ -351,7 +375,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i+1][j-1].getText()==fichacontraria)
             {
-                j--;i++;
+                //j--;i++;
                 while(j>=1 || i<=TAM-1)
                 {
                     if (boton[i+1][j-1].getText()==fichacontraria)
@@ -383,7 +407,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i+1][j].getText()==fichacontraria)
             {
-                i++;
+                //i++;
                 while(i<=TAM-1)
                 {
                     if (boton[i+1][j].getText()==fichacontraria)
@@ -414,7 +438,7 @@ public class juego extends AppCompatActivity {
         {
             if (boton[i+1][j+1].getText()==fichacontraria)
             {
-                j++;i++;
+                //j++;i++;
                 while(j<=TAM-1 || i<=TAM-1)
                 {
                     if (boton[i+1][j+1].getText()==fichacontraria)
