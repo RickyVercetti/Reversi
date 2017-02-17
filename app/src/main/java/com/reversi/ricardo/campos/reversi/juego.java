@@ -129,6 +129,11 @@ public class juego extends AppCompatActivity {
             if (turnoJugador==true)
             {
                 ((Button) v).setText("J");
+                String tag = ((Button)v).getTag().toString();
+                int i = tag.charAt(0);
+                int j = tag.charAt(1);
+                girarCasillas(i,j);
+
                 turnoJugador=false;
             }
             else
@@ -173,6 +178,8 @@ public class juego extends AppCompatActivity {
         //TODO metemos el contador de puntuaciones
 
         }
+
+
     private void buscarCasillasPermitidas() {
         for (int i=0;i<TAM;i++)
         {
@@ -180,28 +187,28 @@ public class juego extends AppCompatActivity {
             {
                 if (boton[i][j].getText()=="") {
 
-                    NO(boton, i, j, turnoJugador);
+                    NO(i, j);
                     Log.w("??????????XXX???????","NO - i="+i+" j="+j);
-                    N(boton, i, j, turnoJugador);
+                    N(boton, i, j);
                     Log.w("??????????XXX???????","N - i="+i+" j="+j);
-                    NE(boton, i, j, turnoJugador);
+                    NE(boton, i, j);
                     Log.w("??????????XXX???????","NE - i="+i+" j="+j);
-                    O(boton, i, j, turnoJugador);
+                    O(boton, i, j);
                     Log.w("??????????XXX???????","O - i="+i+" j="+j);
-                    E(boton, i, j, turnoJugador);
+                    E(boton, i, j);
                     Log.w("??????????XXX???????","E - i="+i+" j="+j);
-                    SO(boton, i, j, turnoJugador);
+                    SO(boton, i, j);
                     Log.w("??????????XXX???????","SO - i="+i+" j="+j);
-                    S(boton, i, j, turnoJugador);
+                    S(boton, i, j);
                     Log.w("??????????XXX???????","S - i="+i+" j="+j);
-                    SE(boton, i, j, turnoJugador);
+                    SE(boton, i, j);
                     Log.w("??????????XXX???????","SE - i="+i+" j="+j);
                 }
             }
         }
     }
 
-    private void NO(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void NO(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -232,7 +239,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void N(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void N(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -264,7 +271,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void NE(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void NE(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -295,7 +302,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void O(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void O(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -332,7 +339,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void E(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void E(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -364,7 +371,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void SO(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void SO(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -395,7 +402,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void S(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void S(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -427,7 +434,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void SE(Button boton[][],int i, int j,boolean turnoJugador) {
+    private void SE(Button boton[][],int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -457,6 +464,76 @@ public class juego extends AppCompatActivity {
             }
         }
     }
+
+
+    private void girarCasillas(int i, int j) {
+
+        girarNO(i,j);
+        girarN(i,j);
+        girarNE(i,j);
+        girarO(i,j);
+        girarE(i,j);
+        girarSO(i,j);
+        girarS(i,j);
+        girarSE(i,j);
+    }
+
+    private void girarNE(int i, int j) {
+
+        /*String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+        int contador = 0;
+
+        if (i>=2 && j>=2)
+        {
+            if (boton[i-1][j-1].getText()==fichacontraria)
+            {
+                i--;j--;
+                while (i>=1 || j>=1 )
+                {
+                    if (boton[i-1][j-1].getText()==fichapropia)
+                    {
+                        break;
+                    }
+                    if (boton[i-1][j-1].getText()==fichacontraria)
+                    {
+                        i--; j--;
+                        contador++;
+                    }
+                }
+                for (int z=0;z<contador;contador++)
+                {
+                    boton[iInicial+z][jInicial+z].setText(fichapropia);
+                }
+            }
+        }
+        //if*/
+    }
+
+    private void girarN(int i, int j) {
+    }
+
+    private void girarNO(int i, int j) {
+    }
+
+    private void girarO(int i, int j) {
+    }
+
+    private void girarE(int i, int j) {
+    }
+
+    private void girarSO(int i, int j) {
+    }
+
+    private void girarS(int i, int j) {
+    }
+
+    private void girarSE(int i, int j) {
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_juego, menu);
