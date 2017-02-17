@@ -130,8 +130,8 @@ public class juego extends AppCompatActivity {
             {
                 ((Button) v).setText("J");
                 String tag = ((Button)v).getTag().toString();
-                int i = tag.charAt(0);
-                int j = tag.charAt(1);
+                int i = Integer.parseInt(tag.substring(0,1));
+                int j = Integer.parseInt(tag.substring(1));
                 girarCasillas(i,j);
 
                 turnoJugador=false;
@@ -188,21 +188,21 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText()=="") {
 
                     NO(i, j);
-                    Log.w("??????????XXX???????","NO - i="+i+" j="+j);
-                    N(boton, i, j);
-                    Log.w("??????????XXX???????","N - i="+i+" j="+j);
-                    NE(boton, i, j);
-                    Log.w("??????????XXX???????","NE - i="+i+" j="+j);
-                    O(boton, i, j);
-                    Log.w("??????????XXX???????","O - i="+i+" j="+j);
-                    E(boton, i, j);
-                    Log.w("??????????XXX???????","E - i="+i+" j="+j);
-                    SO(boton, i, j);
-                    Log.w("??????????XXX???????","SO - i="+i+" j="+j);
-                    S(boton, i, j);
-                    Log.w("??????????XXX???????","S - i="+i+" j="+j);
-                    SE(boton, i, j);
-                    Log.w("??????????XXX???????","SE - i="+i+" j="+j);
+                    Log.w("???","NO - i="+i+" j="+j);
+                    N(i, j);
+                    Log.w("???","N - i="+i+" j="+j);
+                    NE(i, j);
+                    Log.w("???","NE - i="+i+" j="+j);
+                    O(i, j);
+                    Log.w("???","O - i="+i+" j="+j);
+                    E(i, j);
+                    Log.w("???","E - i="+i+" j="+j);
+                    SO(i, j);
+                    Log.w("???","SO - i="+i+" j="+j);
+                    S(i, j);
+                    Log.w("???","S - i="+i+" j="+j);
+                    SE(i, j);
+                    Log.w("???","SE - i="+i+" j="+j);
                 }
             }
         }
@@ -239,7 +239,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void N(Button boton[][],int i, int j) {
+    private void N(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -271,7 +271,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void NE(Button boton[][],int i, int j) {
+    private void NE(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -302,7 +302,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void O(Button boton[][],int i, int j) {
+    private void O(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -339,7 +339,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void E(Button boton[][],int i, int j) {
+    private void E(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -371,7 +371,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void SO(Button boton[][],int i, int j) {
+    private void SO(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -402,7 +402,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void S(Button boton[][],int i, int j) {
+    private void S(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -434,7 +434,7 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-    private void SE(Button boton[][],int i, int j) {
+    private void SE(int i, int j) {
 
         String fichacontraria = null;
         String fichapropia = null;
@@ -478,45 +478,49 @@ public class juego extends AppCompatActivity {
         girarSE(i,j);
     }
 
-    private void girarNE(int i, int j) {
 
-        /*String fichacontraria = null;
+    private void girarNO(int i, int j) {
+
+        String fichacontraria = null;
         String fichapropia = null;
         int iInicial = i,jInicial = j;
+        int contador = 0;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        int contador = 0;
 
-        if (i>=2 && j>=2)
-        {
-            if (boton[i-1][j-1].getText()==fichacontraria)
-            {
-                i--;j--;
-                while (i>=1 || j>=1 )
-                {
-                    if (boton[i-1][j-1].getText()==fichapropia)
-                    {
-                        break;
-                    }
-                    if (boton[i-1][j-1].getText()==fichacontraria)
-                    {
-                        i--; j--;
-                        contador++;
-                    }
-                }
-                for (int z=0;z<contador;contador++)
-                {
-                    boton[iInicial+z][jInicial+z].setText(fichapropia);
-                }
-            }
-        }
-        //if*/
     }
 
     private void girarN(int i, int j) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i >=2)
+        {
+            i--;
+            Log.w("MIERDA",String.valueOf(i));
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1)
+            {
+                Log.w("MIERDA",String.valueOf(i));
+                contador++;
+                i--;
+            }
+            Log.w("MIERDA",String.valueOf(i));
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for(int z = 1; z < contador; z++)
+                {
+                    boton[iInicial-z][j].setText(fichapropia);
+                }
+            }
+        }
     }
 
-    private void girarNO(int i, int j) {
+    private void girarNE(int i, int j) {
     }
 
     private void girarO(int i, int j) {
