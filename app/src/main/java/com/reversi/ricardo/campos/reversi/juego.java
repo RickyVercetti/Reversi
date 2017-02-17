@@ -73,8 +73,9 @@ public class juego extends AppCompatActivity {
         setContentView(layout_secundario);
         tableroInicial();
     }
-    public void tableroInicial()
-    {
+
+
+    public void tableroInicial() {
         turnoJugador = true;
         int mitad = TAM/2;
 
@@ -86,7 +87,7 @@ public class juego extends AppCompatActivity {
         boton[mitad-1][mitad].setText("M");
         buscarCasillasPermitidas();
 
-        /*
+        //TODO Esquinas
         boton[1][1].setText("J");
         boton[0][0].setText("J");
         boton[0][1].setText("M");
@@ -107,19 +108,17 @@ public class juego extends AppCompatActivity {
         boton[TAM-1][TAM-2].setText("M");
         boton[TAM-2][TAM-1].setText("M");
 
-    */
+
 
 
     }
 
-    private View.OnClickListener casillaJuego = new View.OnClickListener() {
-        public void onClick(View v)
-        {
+
+    private View.OnClickListener casillaJuego = new View.OnClickListener() {public void onClick(View v) {
             casillaPulsada(v);
             buscarCasillasPermitidas();
         }
     };
-
 
 
     private void casillaPulsada(View v) {
@@ -133,12 +132,17 @@ public class juego extends AppCompatActivity {
                 int i = Integer.parseInt(tag.substring(0,1));
                 int j = Integer.parseInt(tag.substring(1));
                 girarCasillas(i,j);
-
+                restaurarCasillas();
                 turnoJugador=false;
             }
             else
             {
                 ((Button) v).setText("M");
+                String tag = ((Button)v).getTag().toString();
+                int i = Integer.parseInt(tag.substring(0,1));
+                int j = Integer.parseInt(tag.substring(1));
+                girarCasillas(i,j);
+                restaurarCasillas();
                 turnoJugador=true;
             }
 
@@ -167,7 +171,7 @@ public class juego extends AppCompatActivity {
         }
         if (((Button)v).getText().equals("J") || ((Button)v).getText().equals("M"))
         {
-            //Toast.makeText(this, "Aquí ya ahí una ficha!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Aquí ya ahí una ficha!", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -208,6 +212,7 @@ public class juego extends AppCompatActivity {
         }
     }
 
+
     private void NO(int i, int j) {
 
         String fichacontraria = null;
@@ -215,6 +220,25 @@ public class juego extends AppCompatActivity {
         int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
+
+
+        if (i>=2 && j>=2)
+        {
+            i--;j--;
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j>=1)
+            {
+                i--;j--;
+
+            }
+            if (!((i+1 == iInicial) && (j+1 == jInicial)))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[iInicial][jInicial].setText("P");
+                }
+            }
+        }
+        /*
         if (i>=2 && j>=2)
         {
             if (boton[i-1][j-1].getText()==fichacontraria)
@@ -237,7 +261,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void N(int i, int j) {
 
@@ -248,6 +272,23 @@ public class juego extends AppCompatActivity {
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i>=2)
+        {
+            i--;
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1)
+            {
+                i--;
+            }
+            if (!(i+1 == iInicial))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[iInicial][j].setText("P");
+                }
+            }
+        }
+
+
+        /*if (i>=2)
         {
             if (boton[i-1][j].getText()==fichacontraria)
             {
@@ -269,7 +310,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void NE(int i, int j) {
 
@@ -278,7 +319,24 @@ public class juego extends AppCompatActivity {
         int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
+
         if (i>=2 && j<=TAM-2)
+        {
+            i--;j++;
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j<=TAM-1)
+            {
+                i--;j++;
+            }
+            if (!((i+1 == iInicial) && (j-1 == jInicial)))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[iInicial][jInicial].setText("P");
+                }
+            }
+        }
+
+        /*if (i>=2 && j<=TAM-2)
         {
             if (boton[i-1][j+1].getText()==fichacontraria)
             {
@@ -300,7 +358,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void O(int i, int j) {
 
@@ -309,10 +367,27 @@ public class juego extends AppCompatActivity {
         int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
-        //TODO Cambiado metodo de busqueda
+
+        if (j>=2)
+        {
+            j--;
+            while (boton[i][j].getText().equals(fichacontraria) && j>=1)
+            {
+                j--;
+            }
+            if (!(j+1 == jInicial))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[i][jInicial].setText("P");
+                }
+            }
+        }
+
+        /*
         if(j>=2)
         {
-            //j--;//TODO posible quitar
+            //j--;
             if(boton[i][j-1].getText()==fichacontraria)
             {
                 while(j>=1)
@@ -337,7 +412,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void E(int i, int j) {
 
@@ -347,6 +422,22 @@ public class juego extends AppCompatActivity {
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
+        if (j<=TAM-2)
+        {
+            j++;
+            while (boton[i][j].getText().equals(fichacontraria) && j<=TAM-1)
+            {
+                j++;
+            }
+            if (!(j-1 == jInicial))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[i][jInicial].setText("P");
+                }
+            }
+        }
+        /*
         if (j<=TAM-2)
         {
             if (boton[i][j+1].getText()==fichacontraria)
@@ -369,7 +460,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void SO(int i, int j) {
 
@@ -378,6 +469,26 @@ public class juego extends AppCompatActivity {
         int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i<=TAM-2 && j>=2)
+        {
+            //Log.w("MIERDA",String.valueOf(i)+" "+String.valueOf(j));
+            i++;j--;
+            //Log.w("MIERDA",String.valueOf(i)+" "+String.valueOf(j));
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j>=1)
+            {
+                i++;j--;
+
+            }
+            if (!((i-1 == iInicial) && (j+1 == jInicial)))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[iInicial][jInicial].setText("P");
+                }
+            }
+        }
+        /*
         if (i<=TAM-2 && j>=2)
         {
             if (boton[i+1][j-1].getText()==fichacontraria)
@@ -400,7 +511,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void S(int i, int j) {
 
@@ -411,6 +522,22 @@ public class juego extends AppCompatActivity {
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i<=TAM-2)
+        {
+            i++;
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1)
+            {
+                i++;
+            }
+            if (!(i-1 == iInicial))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[iInicial][j].setText("P");
+                }
+            }
+        }
+
+        /*if (i<=TAM-2)
         {
             if (boton[i+1][j].getText()==fichacontraria)
             {
@@ -432,7 +559,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
     private void SE(int i, int j) {
 
@@ -441,6 +568,23 @@ public class juego extends AppCompatActivity {
         int iInicial = i,jInicial = j;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i<=TAM-2 && j<=TAM-2)
+        {
+            i++;j++;
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j<=TAM-1)
+            {
+                i++;j++;
+            }
+            if (!((i-1 == iInicial) && (j-1 == jInicial)))
+            {
+                if (boton[i][j].getText().equals(fichapropia))
+                {
+                    boton[iInicial][jInicial].setText("P");
+                }
+            }
+        }
+        /*
         if (i<=TAM-2 && j<=TAM-2)
         {
             if (boton[i+1][j+1].getText()==fichacontraria)
@@ -462,7 +606,7 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
-        }
+        }*/
     }
 
 
@@ -484,12 +628,28 @@ public class juego extends AppCompatActivity {
         String fichacontraria = null;
         String fichapropia = null;
         int iInicial = i,jInicial = j;
-        int contador = 0;
+        int contador = 1;
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
-    }
+        if (i>=2 && j>=2)
+        {
+            i--; j--;
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j>=1)
+            {
+                contador++;
+                i--; j--;
+            }
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for (int z = 1; z<contador;z++)
+                {
+                    boton[iInicial-z][jInicial-z].setText(fichapropia);
+                }
+            }
+        }
 
+    }
     private void girarN(int i, int j) {
 
         String fichacontraria = null;
@@ -519,26 +679,182 @@ public class juego extends AppCompatActivity {
             }
         }
     }
-
     private void girarNE(int i, int j) {
-    }
 
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i<=TAM-2 && j<=TAM-2)
+        {
+            i++; j++;
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j<=TAM-1)
+            {
+                contador++;
+                i++; j++;
+            }
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for (int z = 1; z<contador;z++)
+                {
+                    boton[iInicial+z][jInicial+z].setText(fichapropia);
+                }
+            }
+        }
+    }
     private void girarO(int i, int j) {
-    }
 
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (j>=2)
+        {
+            j--;
+            while (boton[i][j].getText().equals(fichacontraria) && j>=1)
+            {
+                contador++;
+                j--;
+            }
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for (int z = 1; z<contador;z++)
+                {
+                    boton[i][jInicial-z].setText(fichapropia);
+                }
+            }
+        }
+    }
     private void girarE(int i, int j) {
-    }
 
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (j<=TAM-2)
+        {
+            j++;
+            while (boton[i][j].getText().equals(fichacontraria) && j<=TAM-1)
+            {
+                contador++;
+                j++;
+            }
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for (int z = 1; z<contador;z++)
+                {
+                    boton[i][jInicial+z].setText(fichapropia);
+                }
+            }
+        }
+    }
     private void girarSO(int i, int j) {
-    }
 
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i<=TAM-2 && j>=2)
+        {
+            i++; j--;
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j>=1)
+            {
+                contador++;
+                i++; j--;
+            }
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for (int z = 1; z<contador;z++)
+                {
+                    boton[iInicial+z][jInicial-z].setText(fichapropia);
+                }
+            }
+        }
+    }
     private void girarS(int i, int j) {
-    }
 
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i <=TAM-2)
+        {
+            i++;
+            Log.w("MIERDA",String.valueOf(i));
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1)
+            {
+                Log.w("MIERDA",String.valueOf(i));
+                contador++;
+                i++;
+            }
+            Log.w("MIERDA",String.valueOf(i));
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for(int z = 1; z < contador; z++)
+                {
+                    boton[iInicial+z][j].setText(fichapropia);
+                }
+            }
+        }
+    }
     private void girarSE(int i, int j) {
+
+        String fichacontraria = null;
+        String fichapropia = null;
+        int iInicial = i,jInicial = j;
+        int contador = 1;
+        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        else{ fichacontraria = "J"; fichapropia="M"; }
+
+        if (i<=TAM-2 && j<=TAM-2)
+        {
+            i++; j++;
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j<=TAM-1)
+            {
+                contador++;
+                i++; j++;
+            }
+            if (boton[i][j].getText().equals(fichapropia))
+            {
+                for (int z = 1; z<contador;z++)
+                {
+                    boton[iInicial+z][jInicial+z].setText(fichapropia);
+                }
+            }
+        }
     }
 
 
+    private void restaurarCasillas() {
+
+        int i,j;
+
+        for (i=0;i<TAM;i++)
+        {
+            for (j=0;j<TAM;j++)
+            {
+                if (boton[i][j].getText().equals("P"))
+                {
+                    boton[i][j].setText("");
+                }
+            }
+        }
+    }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_juego, menu);
         return true;
