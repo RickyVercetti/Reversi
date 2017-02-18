@@ -118,8 +118,29 @@ public class juego extends AppCompatActivity {
     private View.OnClickListener casillaJuego = new View.OnClickListener() {public void onClick(View v) {
             casillaPulsada(v);
             buscarCasillasPermitidas();
+            int posible = 0;
+            for (int i = 0; i < TAM;i++) {
+                for (int j = 0; j < TAM; j++) {
+
+                    if (boton[i][j].getText().equals("P"))
+                    {
+                        posible++;
+                    }
+                }
+            }
+            if (posible==0)
+            {
+                cambioTurno();
+            }
         }
     };
+
+    private void cambioTurno() {
+
+        Toast.makeText(null, "Imposible insertar una ficha, cambio de turno!", Toast.LENGTH_LONG).show();
+        turnoJugador = !turnoJugador;
+        buscarCasillasPermitidas();
+    }
 
 
     private void casillaPulsada(View v) {
@@ -151,6 +172,7 @@ public class juego extends AppCompatActivity {
             textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
             int contadorMaquina = 0;
             int contadorJugador = 0;
+            casillasVacias = 0;
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
                     if (boton[i][j].getText() == "J") {
@@ -167,17 +189,29 @@ public class juego extends AppCompatActivity {
             textoMaquina.setText(String.valueOf(contadorMaquina));
             if (casillasVacias==0)
             {
-
+                /*
+                if (contadorJugador>contadorMaquina)
+                {
+                    Toast.makeText(this, "Has ganado!", Toast.LENGTH_SHORT).show();
+                }
+                if (contadorJugador<contadorMaquina)
+                {
+                    Toast.makeText(this, "Has perdido!", Toast.LENGTH_SHORT).show();
+                }
+                if (contadorJugador==contadorMaquina)
+                {
+                    Toast.makeText(this, "Empate!", Toast.LENGTH_SHORT).show();
+                }*/
             }
         }
-        if (((Button)v).getText().equals("J") || ((Button)v).getText().equals("M"))
+        /*if (((Button)v).getText().equals("J") || ((Button)v).getText().equals("M"))
         {
-            //Toast.makeText(this, "Aquí ya ahí una ficha!", Toast.LENGTH_SHORT).show();
+            //
         }
         else
         {
             //Toast.makeText(this, "Aquí no puedes!", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
 
         //TODO metemos el contador de puntuaciones
@@ -610,7 +644,7 @@ public class juego extends AppCompatActivity {
         if (i>=2 && j>=2)
         {
             i--; j--;
-            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j>=1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>1 && j>1)
             {
                 contador++;
                 i--; j--;
@@ -638,7 +672,7 @@ public class juego extends AppCompatActivity {
         {
             i--;
             Log.w("MIERDA",String.valueOf(i));
-            while (boton[i][j].getText().equals(fichacontraria) && i>=1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>1)
             {
                 Log.w("MIERDA",String.valueOf(i));
                 contador++;
@@ -666,7 +700,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2 && j<=TAM-2)
         {
             i++; j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j<=TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j<TAM-1)
             {
                 contador++;
                 i++; j++;
@@ -692,7 +726,7 @@ public class juego extends AppCompatActivity {
         if (j>=2)
         {
             j--;
-            while (boton[i][j].getText().equals(fichacontraria) && j>=1)
+            while (boton[i][j].getText().equals(fichacontraria) && j>1)
             {
                 contador++;
                 j--;
@@ -718,7 +752,7 @@ public class juego extends AppCompatActivity {
         if (j<=TAM-2)
         {
             j++;
-            while (boton[i][j].getText().equals(fichacontraria) && j<=TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && j<TAM-1)
             {
                 contador++;
                 j++;
@@ -744,7 +778,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2 && j>=2)
         {
             i++; j--;
-            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j>=1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j>1)
             {
                 contador++;
                 i++; j--;
@@ -771,7 +805,7 @@ public class juego extends AppCompatActivity {
         {
             i++;
             Log.w("MIERDA",String.valueOf(i));
-            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1)
             {
                 Log.w("MIERDA",String.valueOf(i));
                 contador++;
@@ -799,7 +833,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2 && j<=TAM-2)
         {
             i++; j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-1 && j<=TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j<TAM-1)
             {
                 contador++;
                 i++; j++;
