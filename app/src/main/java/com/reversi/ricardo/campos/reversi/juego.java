@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,7 +31,6 @@ public class juego extends AppCompatActivity {
     TextView textoJugador = null;
     TextView textoMaquina = null;
     private boolean turnoJugador;
-    private static int botonTAG = 1;
     private int casillasVacias;
 
 
@@ -58,15 +58,12 @@ public class juego extends AppCompatActivity {
 
             filabotones.setLayoutParams(configuracion);
             for (int j = 0; j < TAM; j++) {
-                boton[i][j]  = new MiBoton(this); //TODO corregir la creación de botones
+                boton[i][j]  = new MiBoton(this);
                 boton[i][j].setTag(i+""+j);
                 boton[i][j].setText("");
                 boton[i][j].setLayoutParams(configuracion);
                 filabotones.addView(boton[i][j]);
                 boton[i][j].setOnClickListener(casillaJuego);
-
-                //casillaPermitida(i,j,botonTAG);
-                botonTAG++;
             }
             dinamico.addView(filabotones);
         }
@@ -82,9 +79,13 @@ public class juego extends AppCompatActivity {
 
         //TODO EN el centro
         boton[mitad][mitad].setText("J");
+        mostrarFichaJugador(mitad,mitad);
         boton[mitad-1][mitad-1].setText("J");
+        mostrarFichaJugador(mitad-1,mitad-1);
         boton[mitad][mitad-1].setText("M");
+        mostrarFichaMaquina(mitad,mitad-1);
         boton[mitad-1][mitad].setText("M");
+        mostrarFichaMaquina(mitad-1,mitad);
         buscarCasillasPermitidas();
 
         //TODO Esquinas
@@ -153,6 +154,7 @@ public class juego extends AppCompatActivity {
                 String tag = ((Button)v).getTag().toString();
                 int i = Integer.parseInt(tag.substring(0,1));
                 int j = Integer.parseInt(tag.substring(1));
+                mostrarFichaJugador(i,j);
                 girarCasillas(i,j);
                 restaurarCasillas();
                 turnoJugador=false;
@@ -163,6 +165,7 @@ public class juego extends AppCompatActivity {
                 String tag = ((Button)v).getTag().toString();
                 int i = Integer.parseInt(tag.substring(0,1));
                 int j = Integer.parseInt(tag.substring(1));
+                mostrarFichaMaquina(i,j);
                 girarCasillas(i,j);
                 restaurarCasillas();
                 turnoJugador=true;
@@ -177,9 +180,11 @@ public class juego extends AppCompatActivity {
                 for (int j = 0; j < TAM; j++) {
                     if (boton[i][j].getText() == "J") {
                         contadorJugador++;
+                        mostrarFichaJugador(i,j);
                     }
                     if(boton[i][j].getText() == "M"){
                         contadorMaquina++;
+                        mostrarFichaMaquina(i,j);
                     }else{
                         casillasVacias++;
                     }
@@ -270,6 +275,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[iInicial][jInicial].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -318,6 +324,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[iInicial][j].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -367,6 +374,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[iInicial][jInicial].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -391,6 +399,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[i][jInicial].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -445,6 +454,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[i][jInicial].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -494,6 +504,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[iInicial][jInicial].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -542,6 +553,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[iInicial][j].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -590,6 +602,7 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals(fichapropia))
                 {
                     boton[iInicial][jInicial].setText("P");
+                    mostrarFichaPosible(iInicial,jInicial);
                 }
             }
         }
@@ -697,19 +710,19 @@ public class juego extends AppCompatActivity {
         if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
-        if (i<=TAM-2 && j<=TAM-2)
+        if (i>=2 && j<=TAM-2)
         {
-            i++; j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j<TAM-1)
+            i--; j++;
+            while (boton[i][j].getText().equals(fichacontraria) && i>1 && j<TAM-1)
             {
                 contador++;
-                i++; j++;
+                i--; j++;
             }
             if (boton[i][j].getText().equals(fichapropia))
             {
                 for (int z = 1; z<contador;z++)
                 {
-                    boton[iInicial+z][jInicial+z].setText(fichapropia);
+                    boton[iInicial-z][jInicial+z].setText(fichapropia);
                 }
             }
         }
@@ -860,12 +873,50 @@ public class juego extends AppCompatActivity {
                 if (boton[i][j].getText().equals("P"))
                 {
                     boton[i][j].setText("");
+                    boton[i][j].paint.setARGB(0,148,148,148);
+                    boton[i][j].invalidate();
                 }
             }
         }
     }
+
+
+    private void mostrarFichaJugador(int i,int j) {
+        boton[i][j].paint.setARGB(255,250,250,250);
+        boton[i][j].invalidate();
+    }
+    private void mostrarFichaMaquina(int i,int j) {
+        boton[i][j].paint.setARGB(255,0,0,0);
+        boton[i][j].invalidate();
+    }
+    private void mostrarFichaPosible(int i, int j) {
+
+        boton[i][j].paint.setARGB(255,148,148,148);
+        boton[i][j].invalidate();
+        /*
+        if (ayuda==true)
+        {
+            boton[i][j].paint.setARGB(255,148,148,148);
+            boton[i][j].invalidate();
+        }
+        else
+        {
+            boton[i][j].paint.setARGB(0,148,148,148);
+            boton[i][j].invalidate();
+        }
+        */
+    }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_juego, menu);
         return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.ayuda) {
+            ayuda = !ayuda;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
