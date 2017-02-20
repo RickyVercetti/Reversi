@@ -1,7 +1,6 @@
 package com.reversi.ricardo.campos.reversi;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import static android.graphics.Color.GREEN;
 
 public class juego extends AppCompatActivity {
 
@@ -76,8 +73,6 @@ public class juego extends AppCompatActivity {
         turnoJugador = true;
         int mitad = TAM/2;
 
-
-        //TODO EN el centro
         boton[mitad][mitad].setText("J");
         mostrarFichaJugador(mitad,mitad);
         boton[mitad-1][mitad-1].setText("J");
@@ -88,7 +83,6 @@ public class juego extends AppCompatActivity {
         mostrarFichaMaquina(mitad-1,mitad);
         buscarCasillasPermitidas();
 
-        //TODO Esquinas
         /*
         boton[1][1].setText("J");
         boton[0][0].setText("J");
@@ -110,13 +104,12 @@ public class juego extends AppCompatActivity {
         boton[TAM-1][TAM-2].setText("M");
         boton[TAM-2][TAM-1].setText("M");
 
-*/
-
-
+        */
     }
 
 
-    private View.OnClickListener casillaJuego = new View.OnClickListener() {public void onClick(View v) {
+    private View.OnClickListener casillaJuego = new View.OnClickListener()
+        {public void onClick(View v) {
             casillaPulsada(v);
             buscarCasillasPermitidas();
             int posible = 0;
@@ -148,10 +141,10 @@ public class juego extends AppCompatActivity {
 
         if (((Button)v).getText().equals("P"))
         {
-            if (turnoJugador==true)
+            if (turnoJugador)
             {
                 ((Button) v).setText("J");
-                String tag = ((Button)v).getTag().toString();
+                String tag = v.getTag().toString();
                 int i = Integer.parseInt(tag.substring(0,1));
                 int j = Integer.parseInt(tag.substring(1));
                 mostrarFichaJugador(i,j);
@@ -162,7 +155,7 @@ public class juego extends AppCompatActivity {
             else
             {
                 ((Button) v).setText("M");
-                String tag = ((Button)v).getTag().toString();
+                String tag = v.getTag().toString();
                 int i = Integer.parseInt(tag.substring(0,1));
                 int j = Integer.parseInt(tag.substring(1));
                 mostrarFichaMaquina(i,j);
@@ -175,7 +168,7 @@ public class juego extends AppCompatActivity {
             textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
             int contadorMaquina = 0;
             int contadorJugador = 0;
-            casillasVacias = 0;
+
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
                     if (boton[i][j].getText() == "J") {
@@ -185,43 +178,18 @@ public class juego extends AppCompatActivity {
                     if(boton[i][j].getText() == "M"){
                         contadorMaquina++;
                         mostrarFichaMaquina(i,j);
-                    }else{
-                        casillasVacias++;
                     }
                 }
             }
             textoJugador.setText(String.valueOf(contadorJugador));
             textoMaquina.setText(String.valueOf(contadorMaquina));
-            if (casillasVacias==0)
+
+            if (contadorJugador + contadorMaquina == TAM*TAM)
             {
-                /*
-                if (contadorJugador>contadorMaquina)
-                {
-                    Toast.makeText(this, "Has ganado!", Toast.LENGTH_SHORT).show();
-                }
-                if (contadorJugador<contadorMaquina)
-                {
-                    Toast.makeText(this, "Has perdido!", Toast.LENGTH_SHORT).show();
-                }
-                if (contadorJugador==contadorMaquina)
-                {
-                    Toast.makeText(this, "Empate!", Toast.LENGTH_SHORT).show();
-                }*/
+                //Crear pront para meter nombre y guardarlo en la base de datos
             }
         }
-        /*if (((Button)v).getText().equals("J") || ((Button)v).getText().equals("M"))
-        {
-            //
-        }
-        else
-        {
-            //Toast.makeText(this, "Aquí no puedes!", Toast.LENGTH_SHORT).show();
-        }*/
-
-
-        //TODO metemos el contador de puntuaciones
-
-        }
+    }
 
 
     private void buscarCasillasPermitidas() {
@@ -255,10 +223,10 @@ public class juego extends AppCompatActivity {
 
     private void buscarNO(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
 
@@ -279,37 +247,13 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
-/*
-        if (i>=2 && j>=2)
-        {
-            if (boton[i-1][j-1].getText()==fichacontraria)
-            {
-                //j--;i--;
-                while(j>=1 || i>=1)
-                {
-                    if (boton[i-1][j-1].getText()==fichacontraria)
-                    {
-                        j--;i--;
-                    }
-                    else if (boton[i-1][j-1].getText()==fichapropia)
-                    {
-                        boton[iInicial][jInicial].setText("P");
-                        break;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }*/
     }
     private void buscarN(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i>=2)
@@ -328,38 +272,13 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
-
-/*
-        if (i>=2)
-        {
-            if (boton[i-1][j].getText()==fichacontraria)
-            {
-                //i--;
-                while(i>=1)
-                {
-                    if (boton[i-1][j].getText()==fichacontraria)
-                    {
-                        i--;
-                    }
-                    else if (boton[i-1][j].getText()==fichapropia)
-                    {
-                    boton[iInicial][jInicial].setText("P");
-                    break;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }*/
     }
     private void buscarNE(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i>=2 && j<=TAM-2)
@@ -381,10 +300,10 @@ public class juego extends AppCompatActivity {
     }
     private void buscarO(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (j>=2)
@@ -403,43 +322,13 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
-/*
-
-        if(j>=2)
-        {
-            //j--;
-            if(boton[i][j-1].getText()==fichacontraria)
-            {
-                while(j>=1)
-                {
-                    if (boton[i][1].getText()==fichacontraria && boton[i][0].getText()==fichapropia)
-                    {
-                        boton[iInicial][jInicial].setText("P");
-                        break;
-                    }
-                    if (boton[i][j-1].getText()==fichacontraria)
-                    {
-                        j--;
-                    }
-                    else if (boton[i][j-1].getText()==fichapropia)
-                    {
-                        boton[iInicial][jInicial].setText("P");
-                        break;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }*/
     }
     private void buscarE(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (j<=TAM-2)
@@ -458,37 +347,13 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
-/*
-        if (j<=TAM-2)
-        {
-            if (boton[i][j+1].getText()==fichacontraria)
-            {
-                //j++;
-                while(j<=TAM-1)
-                {
-                    if (boton[i][j+1].getText()==fichacontraria)
-                    {
-                        j++;
-                    }
-                    else if (boton[i][j+1].getText()==fichapropia)
-                    {
-                        boton[iInicial][jInicial].setText("P");
-                        break;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }*/
     }
     private void buscarSO(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i<=TAM-2 && j>=2)
@@ -535,10 +400,10 @@ public class juego extends AppCompatActivity {
     }
     private void buscarS(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i<=TAM-2)
@@ -557,37 +422,13 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
-/*
-        if (i<=TAM-2)
-        {
-            if (boton[i+1][j].getText()==fichacontraria)
-            {
-                //i++;
-                while(i<=TAM-1)
-                {
-                    if (boton[i+1][j].getText()==fichacontraria)
-                    {
-                        i++;
-                    }
-                    else if (boton[i+1][j].getText()==fichapropia)
-                    {
-                        boton[iInicial][jInicial].setText("P");
-                        break;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }*/
     }
     private void buscarSE(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i<=TAM - 2 && j<= TAM - 2)
@@ -647,11 +488,11 @@ public class juego extends AppCompatActivity {
 
     private void girarNO(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i>=2 && j>=2)
@@ -670,28 +511,24 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
-
     }
     private void girarN(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i >=2)
         {
             i--;
-            Log.w("MIERDA",String.valueOf(i));
             while (boton[i][j].getText().equals(fichacontraria) && i>1)
             {
-                Log.w("MIERDA",String.valueOf(i));
                 contador++;
                 i--;
             }
-            Log.w("MIERDA",String.valueOf(i));
             if (boton[i][j].getText().equals(fichapropia))
             {
                 for(int z = 1; z < contador; z++)
@@ -703,11 +540,11 @@ public class juego extends AppCompatActivity {
     }
     private void girarNE(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i>=2 && j<=TAM-2)
@@ -729,11 +566,11 @@ public class juego extends AppCompatActivity {
     }
     private void girarO(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (j>=2)
@@ -755,11 +592,11 @@ public class juego extends AppCompatActivity {
     }
     private void girarE(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (j<=TAM-2)
@@ -781,11 +618,11 @@ public class juego extends AppCompatActivity {
     }
     private void girarSO(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i<=TAM-2 && j>=2)
@@ -807,24 +644,21 @@ public class juego extends AppCompatActivity {
     }
     private void girarS(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
-        if (i <=TAM-2)
+        if (i<=TAM-2)
         {
             i++;
-            Log.w("MIERDA",String.valueOf(i));
             while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1)
             {
-                Log.w("MIERDA",String.valueOf(i));
                 contador++;
                 i++;
             }
-            Log.w("MIERDA",String.valueOf(i));
             if (boton[i][j].getText().equals(fichapropia))
             {
                 for(int z = 1; z < contador; z++)
@@ -836,11 +670,11 @@ public class juego extends AppCompatActivity {
     }
     private void girarSE(int i, int j) {
 
-        String fichacontraria = null;
-        String fichapropia = null;
+        String fichacontraria;
+        String fichapropia;
         int iInicial = i,jInicial = j;
         int contador = 1;
-        if (turnoJugador==true){ fichacontraria = "M"; fichapropia = "J"; }
+        if (turnoJugador){ fichacontraria = "M"; fichapropia = "J"; }
         else{ fichacontraria = "J"; fichapropia="M"; }
 
         if (i<=TAM-2 && j<=TAM-2)
@@ -891,21 +725,19 @@ public class juego extends AppCompatActivity {
     }
     private void mostrarFichaPosible(int i, int j) {
 
-        boton[i][j].paint.setARGB(255,148,148,148);
-        boton[i][j].invalidate();
-        /*
-        if (ayuda==true)
+        if (ayuda)
         {
             boton[i][j].paint.setARGB(255,148,148,148);
             boton[i][j].invalidate();
         }
         else
         {
-            boton[i][j].paint.setARGB(0,148,148,148);
+            boton[i][j].paint.setARGB(255,213,213,213);
             boton[i][j].invalidate();
         }
-        */
     }
+
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_juego, menu);
         return true;
@@ -916,6 +748,7 @@ public class juego extends AppCompatActivity {
 
         if (id == R.id.ayuda) {
             ayuda = !ayuda;
+            buscarCasillasPermitidas();
         }
         return super.onOptionsItemSelected(item);
     }

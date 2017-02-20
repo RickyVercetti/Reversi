@@ -22,23 +22,26 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="Ricardo"
+                android:text="Jugador"
                 android:layout_height="match_parent"
                 android:id="@+id/jugador"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:textSize="18sp"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/background_light" />
 
             <TextView
-                android:text="0"
+                android:text="2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/puntuacionJugador"
                 android:layout_weight="1"
                 android:gravity="top|center"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/background_light" />
 
             <TextView
                 android:text="Maquina"
@@ -48,16 +51,19 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="18sp"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/background_dark" />
 
             <TextView
-                android:text="0"
+                android:text="2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/puntuacionMaquina"
                 android:layout_weight="1"
                 android:gravity="top|center"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@android:color/background_dark"
+                android:textStyle="normal|bold" />
         </LinearLayout>
 
         <LinearLayout
