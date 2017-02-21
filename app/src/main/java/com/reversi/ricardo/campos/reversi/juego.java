@@ -28,7 +28,6 @@ public class juego extends AppCompatActivity {
     TextView textoJugador = null;
     TextView textoMaquina = null;
     private boolean turnoJugador;
-    private int casillasVacias;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -748,7 +747,14 @@ public class juego extends AppCompatActivity {
 
         if (id == R.id.ayuda) {
             ayuda = !ayuda;
-            buscarCasillasPermitidas();
+
+            for (int i=0;i<TAM;i++) {
+                for (int j = 0; j < TAM; j++) {
+                    if (boton[i][j].getText() == "P") {
+                        mostrarFichaPosible(i,j);
+                    }
+                }
+            }
         }
         return super.onOptionsItemSelected(item);
     }
