@@ -262,6 +262,14 @@ public class juego extends AppCompatActivity {
             {
                 i--;
             }
+            if (i==1)
+            {
+                if (boton[0][j].getText().equals(fichacontraria))
+                {
+                    boton[iInicial][j].setText("P");
+                    mostrarFichaPosible(iInicial,j);
+                }
+            }
             if (!(i+1 == iInicial))
             {
                 if (boton[i][j].getText().equals(fichapropia))
@@ -527,6 +535,14 @@ public class juego extends AppCompatActivity {
             {
                 contador++;
                 i--;
+            }
+            if (i==1)
+            {
+                if (boton[0][j].getText().equals(fichacontraria))
+                {
+                    boton[iInicial][j].setText("P");
+                    mostrarFichaPosible(iInicial,j);
+                }
             }
             if (boton[i][j].getText().equals(fichapropia))
             {
