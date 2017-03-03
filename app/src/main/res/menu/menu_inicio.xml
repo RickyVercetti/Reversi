@@ -7,6 +7,8 @@
     <item
         android:id="@+id/instrucciones"
         android:title="Instrucciones"/>
+    <item android:title="Noticias"
+        android:id="@+id/noticias" />
     <item
         android:id="@+id/puntuaciones"
         android:title="Puntuaciones"/>

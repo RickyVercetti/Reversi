@@ -1,6 +1,9 @@
 package com.reversi.ricardo.campos.reversi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Date;
 
 public class juego extends AppCompatActivity {
 
@@ -117,6 +123,7 @@ public class juego extends AppCompatActivity {
 
                     if (boton[i][j].getText().equals("P"))
                     {
+                        //TODO implementar un Array añadiendo las posibles si es maquina, y de ahí hacer un random
                         posible++;
                     }
                 }
@@ -130,7 +137,7 @@ public class juego extends AppCompatActivity {
 
     private void cambioTurno() {
 
-        Toast.makeText(null, "Imposible insertar una ficha, cambio de turno!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Imposible insertar una ficha, cambio de turno!", Toast.LENGTH_LONG).show();
         turnoJugador = !turnoJugador;
         buscarCasillasPermitidas();
     }
@@ -167,6 +174,7 @@ public class juego extends AppCompatActivity {
             textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
             int contadorMaquina = 0;
             int contadorJugador = 0;
+            int casillasVacias = 0;
 
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
@@ -178,14 +186,80 @@ public class juego extends AppCompatActivity {
                         contadorMaquina++;
                         mostrarFichaMaquina(i,j);
                     }
+                    if(boton[i][j].getText() == ""){
+                        casillasVacias++;
+                    }
                 }
             }
             textoJugador.setText(String.valueOf(contadorJugador));
             textoMaquina.setText(String.valueOf(contadorMaquina));
 
-            if (contadorJugador + contadorMaquina == TAM*TAM)
+            if (casillasVacias==0)
             {
+                final int puntuacion = contadorJugador;
                 //Crear pront para meter nombre y guardarlo en la base de datos
+
+
+
+                LayoutInflater inflater = LayoutInflater.from(this);
+
+                View view = inflater.inflate(R.layout.prompt_fin_juego, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Introduce nombre");
+                // Get the layout inflater
+
+                final EditText texto = (EditText) findViewById(R.id.name_input);
+
+
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+                //AlertDialog.Builder alert_builder = builder.setView(inflater.inflate(R.layout.prompt_fin_juego, null))
+                        // Add action buttons
+                        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                String nombre = texto.getText().toString();
+                                BBDDpuntuaciones db_puntuaciones = new BBDDpuntuaciones(getApplicationContext(),"puntuaciones", null, 1);
+                                SQLiteDatabase db = db_puntuaciones.getWritableDatabase();
+                                String sql = "INSERT INTO (puntuaciones (nom,puntuacion,fecha) VALUES ('"+nombre+","+puntuacion+","+new java.sql.Date(new Date().getTime())+"')";
+                                db.execSQL(sql);
+                                db.close();
+                            }
+                        });
+                //builder.create();
+                builder.setView(view);
+                //builder.show();
+
+
+
+                /*
+                LayoutInflater inflater = LayoutInflater.from(this);
+
+                View view = inflater.inflate(R.layout.prompt_fin_juego, null);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setTitle("Introduce nombre");
+                final EditText txtNickname = (EditText) view.findViewById(R.id.prompt_nickname);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.guardarPuntuaciones, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String nickName = txtNickname.getText().toString();
+                        ReversiDB reversiDB = new ReversiDB(juego,"ReversiDB",null,1);
+                        SQLiteDatabase db = reversiDB.getWritableDatabase();
+                        String sql = "INSERT INTO scores (nick,score,boardSize,date) VALUES ('"
+                                +nickName+"',"
+                                +casillasJugador.size()+","
+                                +TAM*TAM+",'"
+                                +new java.sql.Date(new Date().getTime())+"')";
+                        db.execSQL(sql);
+                        db.close();
+                    }
+                });
+                builder.setView(view);
+                builder.show();*/
             }
         }
     }
@@ -262,14 +336,14 @@ public class juego extends AppCompatActivity {
             {
                 i--;
             }
-            if (i==1)
+            /*if (i==1)
             {
                 if (boton[0][j].getText().equals(fichacontraria))
                 {
                     boton[iInicial][j].setText("P");
                     mostrarFichaPosible(iInicial,j);
                 }
-            }
+            }*/
             if (!(i+1 == iInicial))
             {
                 if (boton[i][j].getText().equals(fichapropia))
@@ -316,7 +390,7 @@ public class juego extends AppCompatActivity {
         if (j>=2)
         {
             j--;
-            while (boton[i][j].getText().equals(fichacontraria) && j>=1)
+            while (boton[i][j].getText().equals(fichacontraria) && j>1)
             {
                 j--;
             }
@@ -536,14 +610,14 @@ public class juego extends AppCompatActivity {
                 contador++;
                 i--;
             }
-            if (i==1)
+            /*if (i==1)
             {
                 if (boton[0][j].getText().equals(fichacontraria))
                 {
                     boton[iInicial][j].setText("P");
                     mostrarFichaPosible(iInicial,j);
                 }
-            }
+            }*/
             if (boton[i][j].getText().equals(fichapropia))
             {
                 for(int z = 1; z < contador; z++)
