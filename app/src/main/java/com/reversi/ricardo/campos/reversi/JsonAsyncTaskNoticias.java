@@ -29,29 +29,24 @@ public class JsonAsyncTaskNoticias  extends AsyncTask {
     private String cadena = "";
     private JSONArray jsonArray;
     private Drawable[] drawables;
-    //private ProgressDialog pg;
     private Boolean conexionRealizada = false;
-    private final String urlIP="10.0.2.2";
+    private final String IP="10.0.2.2";
 
     public JsonAsyncTaskNoticias(Context context) {
 
         this.context = context;
-        //pg = new ProgressDialog(context);
-        //pg.setCancelable(false);
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        //pg.setMessage("Cargando noticias");
-        //pg.show();
     }
 
     @Override
     protected Object doInBackground(Object[] objects) {
         BufferedReader reader = null;
         try {
-            URL url = new URL("http://"+urlIP+"/infodb.php");
+            URL url = new URL("http://"+IP+"/infodb.php");
             HttpURLConnection con = (HttpURLConnection) url
                     .openConnection();
             reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -64,7 +59,7 @@ public class JsonAsyncTaskNoticias  extends AsyncTask {
             jsonArray = new JSONArray(cadena);
             drawables = new Drawable[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i++) {
-                url = new URL("http://"+urlIP+"/imagenes/" + jsonArray.getJSONObject(i).getString("image"));
+                url = new URL("http://"+IP+"/imagenes/" + jsonArray.getJSONObject(i).getString("image"));
                 con = (HttpURLConnection) url
                         .openConnection();
                 drawables[i] = Drawable.createFromStream(con.getInputStream(), "src name");
@@ -91,25 +86,20 @@ public class JsonAsyncTaskNoticias  extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        if(conexionRealizada) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            View view = inflater.inflate(R.layout.activity_noticias, null);
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            ListView lv_news = (ListView) view.findViewById(R.id.lista_noticias);
-            lv_news.setAdapter(new JsonAdapterNoticias(context, jsonArray, drawables));
-            builder.setCancelable(true);
-            builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.activity_noticias, null);
+        //AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        ListView lista_noticias = (ListView) view.findViewById(R.id.lista_noticias);
+        lista_noticias.setAdapter(new JsonAdapterNoticias(context, jsonArray, drawables));
+        /*builder.setCancelable(true);
+        /builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
+                public void onClick(DialogInterface dialogInterface, int i) {//dialogInterface.cancel();
                 }
             });
-            builder.setView(view);
-            builder.show();
-            //pg.cancel();
-        }else{
-            //pg.cancel();
-        }
+        //builder.setView(view);
+        //builder.show();*/
 
     }
 

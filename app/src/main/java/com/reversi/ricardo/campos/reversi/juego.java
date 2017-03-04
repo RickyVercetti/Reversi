@@ -2,6 +2,7 @@ package com.reversi.ricardo.campos.reversi;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
@@ -34,10 +35,12 @@ public class juego extends AppCompatActivity {
     TextView textoJugador = null;
     TextView textoMaquina = null;
     private boolean turnoJugador;
+    //int random[][];
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //super.onSaveInstanceState(savedInstanceState);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         TAM = Integer.parseInt(sharedPreferences.getString("tamTablero","8"));
         ayuda = sharedPreferences.getBoolean("ayuda",false);
@@ -118,6 +121,8 @@ public class juego extends AppCompatActivity {
             casillaPulsada(v);
             buscarCasillasPermitidas();
             int posible = 0;
+            int jugador = 0;
+            int maquina = 0;
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
 
@@ -126,12 +131,24 @@ public class juego extends AppCompatActivity {
                         //TODO implementar un Array añadiendo las posibles si es maquina, y de ahí hacer un random
                         posible++;
                     }
+                    if (boton[i][j].getText().equals("J"))
+                    {
+                        jugador++;
+                    }
+                    if (boton[i][j].getText().equals("M"))
+                    {
+                        maquina++;
+                    }
                 }
             }
-            if (posible==0)
+            if (jugador + maquina != TAM * TAM)
             {
-                cambioTurno();
+                if (posible==0)
+                {
+                    cambioTurno();
+                }
             }
+
         }
     };
 
@@ -196,70 +213,17 @@ public class juego extends AppCompatActivity {
 
             if (casillasVacias==0)
             {
-                final int puntuacion = contadorJugador;
-                //Crear pront para meter nombre y guardarlo en la base de datos
+                String partida;
+                String puntos = String.valueOf(contadorJugador);
 
+                if (contadorJugador>contadorMaquina) { partida = "Has Ganado!";}
+                else if (contadorJugador<contadorMaquina) { partida = "Has Perdido!";}
+                else { partida = "Empate!";}
 
-
-                LayoutInflater inflater = LayoutInflater.from(this);
-
-                View view = inflater.inflate(R.layout.prompt_fin_juego, null);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Introduce nombre");
-                // Get the layout inflater
-
-                final EditText texto = (EditText) findViewById(R.id.name_input);
-
-
-                // Inflate and set the layout for the dialog
-                // Pass null as the parent view because its going in the dialog layout
-                //AlertDialog.Builder alert_builder = builder.setView(inflater.inflate(R.layout.prompt_fin_juego, null))
-                        // Add action buttons
-                        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                String nombre = texto.getText().toString();
-                                BBDDpuntuaciones db_puntuaciones = new BBDDpuntuaciones(getApplicationContext(),"puntuaciones", null, 1);
-                                SQLiteDatabase db = db_puntuaciones.getWritableDatabase();
-                                String sql = "INSERT INTO (puntuaciones (nom,puntuacion,fecha) VALUES ('"+nombre+","+puntuacion+","+new java.sql.Date(new Date().getTime())+"')";
-                                db.execSQL(sql);
-                                db.close();
-                            }
-                        });
-                //builder.create();
-                builder.setView(view);
-                //builder.show();
-
-
-
-                /*
-                LayoutInflater inflater = LayoutInflater.from(this);
-
-                View view = inflater.inflate(R.layout.prompt_fin_juego, null);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setTitle("Introduce nombre");
-                final EditText txtNickname = (EditText) view.findViewById(R.id.prompt_nickname);
-                builder.setCancelable(true);
-                builder.setPositiveButton(R.string.guardarPuntuaciones, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String nickName = txtNickname.getText().toString();
-                        ReversiDB reversiDB = new ReversiDB(juego,"ReversiDB",null,1);
-                        SQLiteDatabase db = reversiDB.getWritableDatabase();
-                        String sql = "INSERT INTO scores (nick,score,boardSize,date) VALUES ('"
-                                +nickName+"',"
-                                +casillasJugador.size()+","
-                                +TAM*TAM+",'"
-                                +new java.sql.Date(new Date().getTime())+"')";
-                        db.execSQL(sql);
-                        db.close();
-                    }
-                });
-                builder.setView(view);
-                builder.show();*/
+                Intent intent = new Intent(this,introducir_nombre.class);
+                intent.putExtra("PARTIDA",partida);
+                intent.putExtra("PUNTUACION",puntos);
+                startActivity(intent);
             }
         }
     }

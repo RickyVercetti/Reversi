@@ -1,5 +1,6 @@
 package com.reversi.ricardo.campos.reversi;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.SimpleCursorAdapter;
@@ -27,5 +28,11 @@ public class puntuaciones extends AppCompatActivity {
             list.setAdapter(mAdapter);
         }
 
+    }
+    public void onBackPressed() {
+        //Include the code here
+        Intent intent = new Intent(this,inicio.class);
+        startActivity(intent);
+        return;
     }
 }

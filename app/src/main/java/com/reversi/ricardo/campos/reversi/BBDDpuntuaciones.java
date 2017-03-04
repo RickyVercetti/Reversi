@@ -20,11 +20,11 @@ public class BBDDpuntuaciones extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL(sqlCreate);
-        if (db != null)
+        /*if (db != null)
         {
             db.execSQL("INSERT INTO puntuaciones (nom,puntuacion,fecha) VALUES ('Elon','20','03-02-2017')");
             db.execSQL("INSERT INTO puntuaciones (nom,puntuacion,fecha) VALUES ('Ricardo','30','01-02-2017')");
-        }
+        }*/
     }
 
     public void onUpgrade(SQLiteDatabase db, int versionAnterior, int versionNueva)
