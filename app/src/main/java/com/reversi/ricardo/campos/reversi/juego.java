@@ -296,7 +296,7 @@ public class juego extends AppCompatActivity {
         if (i>=2)
         {
             i--;
-            while (boton[i][j].getText().equals(fichacontraria) && i>1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1)
             {
                 i--;
             }
@@ -569,7 +569,7 @@ public class juego extends AppCompatActivity {
         if (i >=2)
         {
             i--;
-            while (boton[i][j].getText().equals(fichacontraria) && i>1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1)
             {
                 contador++;
                 i--;

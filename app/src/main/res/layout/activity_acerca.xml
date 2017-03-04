@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_acerca"
     android:layout_width="match_parent"
@@ -20,22 +21,39 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:text="Hecho por Ricardo Campos Muñoz."
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:id="@+id/textView3"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textSize="16sp" />
+            android:layout_marginTop="24dp"
+            android:layout_weight="0.17"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="Hecho por:"
+            android:textAlignment="center"
+            android:textSize="30sp" />
 
         <TextView
-            android:text=" Todos los derechos reservados. "
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:layout_weight="0.28"
-            android:textSize="14sp"
-            android:textAlignment="textStart" />
+            android:layout_weight="0.77"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="Ricardo Campos"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:elevation="24dp"
+            android:onClick="click_icono"
+            app:srcCompat="@mipmap/icono" />
     </LinearLayout>
 </RelativeLayout>

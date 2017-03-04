@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ public class introducir_nombre extends AppCompatActivity {
         EditText texto = (EditText) findViewById(R.id.ET_nombre);
         String nombre = texto.getText().toString();
 
-
+        Log.e("Mierda","Nombre = "+nombre);
         if(nombre != "")
         {
             if(nombre.length() > 10)
@@ -51,5 +52,11 @@ public class introducir_nombre extends AppCompatActivity {
         {
             Toast.makeText(this, "Introduce un nombre o nick", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void onBackPressed() {
+        //Include the code here
+        Intent intent = new Intent(this,inicio.class);
+        startActivity(intent);
+        return;
     }
 }

@@ -89,17 +89,8 @@ public class JsonAsyncTaskNoticias  extends AsyncTask {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.activity_noticias, null);
-        //AlertDialog.Builder builder = new AlertDialog.Builder(context);
         ListView lista_noticias = (ListView) view.findViewById(R.id.lista_noticias);
         lista_noticias.setAdapter(new JsonAdapterNoticias(context, jsonArray, drawables));
-        /*builder.setCancelable(true);
-        /builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {//dialogInterface.cancel();
-                }
-            });
-        //builder.setView(view);
-        //builder.show();*/
 
     }
 

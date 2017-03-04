@@ -34,29 +34,67 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.07"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:text="Inicio del Juego"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/textView6"
+                    android:layout_marginBottom="10dp"
                     android:scrollHorizontally="true"
-                    android:text="En el otelo, al igual que en el reversi, se emplea un tablero de 8 filas por 8 columnas y 64 fichas idénticas, redondas, blancas por una cara y negras por la otra (u otros colores). Las casillas se denotan numerando las columnas, comenzando por la esquina superior izquierda del tablero, con letras de la A a la H, e igual con las filas, pero con números del uno al ocho. A un jugador se le asigna un color y se dice que lleva las fichas de ese color, lo mismo para el adversario con el otro color.  En el otelo, de inicio, se colocan cuatro fichas tal como se ve en el diagrama de la izquierda: dos fichas blancas en D4 y E5, y dos negras en E4 y D5. En el reversi estas cuatro casillas comenzarían vacías y se irían ocupando alternativamente, típicamente comenzando por el jugador que lleva las fichas negras. Ésta es la primera diferencia entre las reglas del reversi y del otelo: una única restricción en la apertura (los diagramas de abajo muestran las dos posibles aperturas, no siendo posible la segunda en el otelo)."
-                    android:layout_marginBottom="10dp" />
+                    android:text="Se situarán cuatro fichas (dos de cada color) en las cuatro casillas centrales del tablero, de forma que cada pareja de fichas iguales forme una diagonal entre sí.  Realiza el primer movimiento el jugador que juegue con blancas, alternando el turno entre uno y otro para los movimientos sucesivos."
+                    android:layout_weight="1.21" />
 
                 <TextView
-                    android:text="La segunda y última diferencia entre el reversi y el otelo estriba en el número de fichas del que dispone cada jugador para hacer sus movimientos. En el otelo se comparten las sesenta y cuatro fichas, mientras que en el reversi cada jugador dispone de sólo treinta y dos fichas (sólo existirán diferencias si uno de los jugadores pasa, puesto que entonces el otro jugador tendrá que mover de nuevo gastando una de sus fichas y al final de la partida no le quedarán suficientes para hacer sus últimos movimientos, viéndose pues obligado a pasar).  Empezando por quien lleva las fichas negras los jugadores deben hacer un movimiento por turno, a menos que no puedan hacer ninguno, pasando en ese caso el turno al jugador contrario. El movimiento consiste en colocar una ficha de forma que flanquee una o varias fichas del color contrario y voltear esas fichas para que pasen a mostrar el propio color.  Se voltean todas las fichas que se han flanqueado en ese turno al colocar la ficha del color contrario. Esas fichas, para que estén flanqueadas, deben formar una línea continua recta (diagonal u ortogonal) de fichas del mismo color entre dos fichas del color contrario (una de ellas la recién colocada y la otra ya presente). En el siguiente ejemplo juegan las blancas donde indica la flecha y se puede ver qué fichas se voltean."
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/textView7"
-                    android:paddingBottom="10dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:text="Movimientos"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="18sp" />
 
                 <TextView
-                    android:text="La partida finaliza cuando ningún jugador puede mover (normalmente cuando el tablero está lleno de fichas) y gana quien en ese momento tenga sobre el tablero más fichas mostrando su color."
+                    android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView8"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="10dp"
+                    android:text="Los movimientos consisten en incorporar fichas al tablero a razón de una por turno, nunca en desplazar fichas de las que ya estuvieran sobre el tablero.  Las incorporaciones deberán hacerse en orden a las siguientes normas:  Sólo podrá incorporarse una ficha flanquendo a una o varias fichas contrarias. Por flanquear se entiende el hecho de colocar la nueva ficha en un extremo de una hilera de fichas del color del contrario (una o más fichas) en cuyo extremo opuesto hay una ficha del color de la que se incorpora, sin que existan casillas libres entre ninguna de ellas. Esta hilera puede ser indistintamente vertical, horizontal o diagonal. De este modo, las fichas del contrincante quedan encerradas entre una que ya estaba en el tablero y la nueva ficha. Cada vez que un jugador incorpora una ficha, y por lo tanto encierra a otras del contrario, debe dar la vuelta a las fichas encerradas convirtiéndolas así en propias. Si en una sola incorporación se provocase esta situación de flanqueo en más de una línea, se voltearán todas las fichas contrarias que estuvieran implicadas en cada un de los flanqueos. Si no fuera posible para un jugador encerrar a ninguna ficha, deberá pasar en su turno, volviendo el mismo a su oponente." />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_weight="0.07"
+                    android:fontFamily="casual"
+                    android:gravity="center"
+                    android:text="Final"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.07"
+                    android:text="La partida finaliza cuando todas las casillas del tablero son ocupadas o ninguno de los 2 jugadores tiene posibilidad de incorpar una nueva ficha.  En cualquier caso vence el jugador que tiene más fichas sobre el tablero.  Puede darse el caso de empate si el número de fichas de cada color al acabar la partida es el mismo." />
             </LinearLayout>
         </ScrollView>
 
