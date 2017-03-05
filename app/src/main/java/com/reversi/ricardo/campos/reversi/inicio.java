@@ -12,7 +12,6 @@ public class inicio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getResources().getString(R.string.txt_labelApp).concat("que te peten");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
@@ -45,8 +44,9 @@ public class inicio extends AppCompatActivity {
         }
         else if (id == R.id.noticias)
         {
-            Intent intent = new Intent(this, JsonAdapterNoticias.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this, JsonAdapterNoticias.class);
+            //startActivity(intent);
+            Toast.makeText(this, "Disponible próximamente!", Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.puntuaciones)
         {

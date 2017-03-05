@@ -33,7 +33,7 @@ public class introducir_nombre extends AppCompatActivity {
         EditText texto = (EditText) findViewById(R.id.ET_nombre);
         String nombre = texto.getText().toString();
 
-        Log.e("Mierda","Nombre = "+nombre);
+        //Log.e("Mierda","Nombre = "+nombre);
         if(nombre != "")
         {
             if(nombre.length() > 10)

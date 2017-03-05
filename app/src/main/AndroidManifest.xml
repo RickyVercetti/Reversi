@@ -20,7 +20,8 @@
         <activity android:name=".puntuaciones" />
         <activity android:name=".acerca" />
         <activity android:name=".preferencias" />
-        <activity android:name=".introducir_nombre"></activity>
+        <activity android:name=".introducir_nombre" />
+        <activity android:name=".noticias"></activity>
     </application>
 
 </manifest>

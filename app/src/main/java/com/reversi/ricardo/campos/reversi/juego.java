@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class juego extends AppCompatActivity {
@@ -35,7 +36,6 @@ public class juego extends AppCompatActivity {
     TextView textoJugador = null;
     TextView textoMaquina = null;
     private boolean turnoJugador;
-    //int random[][];
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class juego extends AppCompatActivity {
         mostrarFichaMaquina(mitad-1,mitad);
         buscarCasillasPermitidas();
 
-        /*
+    /*
         boton[1][1].setText("J");
         boton[0][0].setText("J");
         boton[0][1].setText("M");
@@ -112,7 +112,7 @@ public class juego extends AppCompatActivity {
         boton[TAM-1][TAM-2].setText("M");
         boton[TAM-2][TAM-1].setText("M");
 
-        */
+*/
     }
 
 
@@ -123,13 +123,20 @@ public class juego extends AppCompatActivity {
             int posible = 0;
             int jugador = 0;
             int maquina = 0;
+            int cont = 0;
+            ArrayList<String> random = new ArrayList<>(0);
+            String tag;
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
 
                     if (boton[i][j].getText().equals("P"))
                     {
-                        //TODO implementar un Array añadiendo las posibles si es maquina, y de ahí hacer un random
                         posible++;
+                        if (!turnoJugador)
+                        {
+                            random.add(i+""+j);
+                        }
+
                     }
                     if (boton[i][j].getText().equals("J"))
                     {
@@ -141,11 +148,21 @@ public class juego extends AppCompatActivity {
                     }
                 }
             }
+
             if (jugador + maquina != TAM * TAM)
             {
                 if (posible==0)
                 {
                     cambioTurno();
+                }else if (!turnoJugador) {
+                    int aleatorio = (int) Math.floor(Math.random()*(random.size()));
+                    //Toast.makeText(juego.this, "Aleatorio = "+aleatorio+" de "+cont, Toast.LENGTH_SHORT).show();
+                    tag = random.get(aleatorio);
+                    //Toast.makeText(juego.this, "Tag recuperado"+tag, Toast.LENGTH_SHORT).show();
+                    int pos_i = Integer.parseInt(tag.substring(0,1));
+                    int pos_j = Integer.parseInt(tag.substring(1));
+                    //
+                    casillaJuego.onClick(boton[pos_i][pos_j]);
                 }
             }
 
@@ -173,6 +190,11 @@ public class juego extends AppCompatActivity {
                 mostrarFichaJugador(i,j);
                 girarCasillas(i,j);
                 restaurarCasillas();
+                /*try {
+                    Thread.sleep(550);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
                 turnoJugador=false;
             }
             else
@@ -184,6 +206,11 @@ public class juego extends AppCompatActivity {
                 mostrarFichaMaquina(i,j);
                 girarCasillas(i,j);
                 restaurarCasillas();
+                /*try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
                 turnoJugador=true;
             }
 
@@ -255,6 +282,10 @@ public class juego extends AppCompatActivity {
                 }
             }
         }
+        if (!turnoJugador)
+        {
+
+        }
     }
 
 
@@ -270,7 +301,7 @@ public class juego extends AppCompatActivity {
         if (i>=2 && j>=2)
         {
             i--;j--;
-            while (boton[i][j].getText().equals(fichacontraria) && i>1 && j>1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j>=1)
             {
                 i--;j--;
 
@@ -329,7 +360,7 @@ public class juego extends AppCompatActivity {
         if (i>=2 && j<=TAM-2)
         {
             i--;j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i>1 && j<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j<=TAM-2)
             {
                 i--;j++;
             }
@@ -354,7 +385,7 @@ public class juego extends AppCompatActivity {
         if (j>=2)
         {
             j--;
-            while (boton[i][j].getText().equals(fichacontraria) && j>1)
+            while (boton[i][j].getText().equals(fichacontraria) && j>=1)
             {
                 j--;
             }
@@ -379,7 +410,7 @@ public class juego extends AppCompatActivity {
         if (j<=TAM-2)
         {
             j++;
-            while (boton[i][j].getText().equals(fichacontraria) && j<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && j<=TAM-2)
             {
                 j++;
             }
@@ -404,7 +435,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2 && j>=2)
         {
             i++;j--;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j>1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-2 && j>=1)
             {
                 i++;j--;
 
@@ -454,7 +485,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2)
         {
             i++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-2)
             {
                 i++;
             }
@@ -479,7 +510,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM - 2 && j<= TAM - 2)
         {
             i++; j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-2 && j<=TAM-2)
             {
                 i++;j++;
             }
@@ -543,7 +574,7 @@ public class juego extends AppCompatActivity {
         if (i>=2 && j>=2)
         {
             i--; j--;
-            while (boton[i][j].getText().equals(fichacontraria) && i>1 && j>1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j>=1)
             {
                 contador++;
                 i--; j--;
@@ -603,7 +634,7 @@ public class juego extends AppCompatActivity {
         if (i>=2 && j<=TAM-2)
         {
             i--; j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i>1 && j<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i>=1 && j<=TAM-2)
             {
                 contador++;
                 i--; j++;
@@ -629,7 +660,7 @@ public class juego extends AppCompatActivity {
         if (j>=2)
         {
             j--;
-            while (boton[i][j].getText().equals(fichacontraria) && j>1)
+            while (boton[i][j].getText().equals(fichacontraria) && j>=1)
             {
                 contador++;
                 j--;
@@ -655,7 +686,7 @@ public class juego extends AppCompatActivity {
         if (j<=TAM-2)
         {
             j++;
-            while (boton[i][j].getText().equals(fichacontraria) && j<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && j<=TAM-2)
             {
                 contador++;
                 j++;
@@ -681,7 +712,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2 && j>=2)
         {
             i++; j--;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j>1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-2 && j>=1)
             {
                 contador++;
                 i++; j--;
@@ -707,7 +738,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2)
         {
             i++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-2)
             {
                 contador++;
                 i++;
@@ -733,7 +764,7 @@ public class juego extends AppCompatActivity {
         if (i<=TAM-2 && j<=TAM-2)
         {
             i++; j++;
-            while (boton[i][j].getText().equals(fichacontraria) && i<TAM-1 && j<TAM-1)
+            while (boton[i][j].getText().equals(fichacontraria) && i<=TAM-2 && j<=TAM-2)
             {
                 contador++;
                 i++; j++;
