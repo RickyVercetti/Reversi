@@ -60,4 +60,8 @@ public class inicio extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void onBackPressed() {
+
+        this.finish();
+    }
 }
