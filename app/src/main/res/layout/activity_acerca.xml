@@ -38,7 +38,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.77"
+            android:layout_weight="0.54"
             android:fontFamily="casual"
             android:gravity="center"
             android:text="Ricardo Campos"
@@ -46,6 +46,17 @@
             android:textColor="@android:color/background_light"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.26"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="Versión: 1.4"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/imageView"
