@@ -16,4 +16,8 @@ public class acerca extends AppCompatActivity {
     {
         Toast.makeText(this, "Saludos desde Petrer!", Toast.LENGTH_SHORT).show();
     }
+    /*public void onBackPressed() {
+
+        this.finish();
+    }*/
 }

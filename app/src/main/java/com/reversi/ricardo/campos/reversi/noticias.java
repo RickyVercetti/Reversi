@@ -10,4 +10,9 @@ public class noticias extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticias);
     }
+
+    /*public void onBackPressed() {
+
+        this.finish();
+    }*/
 }

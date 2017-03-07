@@ -27,12 +27,11 @@ public class puntuaciones extends AppCompatActivity {
             ListView list = (ListView)findViewById(R.id.lista);
             list.setAdapter(mAdapter);
         }
+    }
 
-    }
-    public void onBackPressed() {
-        //Include the code here
-        Intent intent = new Intent(this,inicio.class);
-        startActivity(intent);
-        return;
-    }
+    /*public void onBackPressed() {
+
+        this.finish();
+    }*/
+
 }

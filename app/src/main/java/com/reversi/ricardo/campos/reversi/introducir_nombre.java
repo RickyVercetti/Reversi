@@ -47,16 +47,16 @@ public class introducir_nombre extends AppCompatActivity {
             db.close();
             Intent intent = new Intent(this,puntuaciones.class);
             startActivity(intent);
+            this.finish();
         }
         else
         {
             Toast.makeText(this, "Introduce un nombre o nick", Toast.LENGTH_SHORT).show();
         }
     }
-    public void onBackPressed() {
-        //Include the code here
-        Intent intent = new Intent(this,inicio.class);
-        startActivity(intent);
-        return;
-    }
+    /*public void onBackPressed() {
+
+        this.finish();
+
+    }*/
 }

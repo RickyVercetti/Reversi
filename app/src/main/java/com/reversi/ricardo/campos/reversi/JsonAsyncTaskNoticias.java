@@ -29,7 +29,7 @@ public class JsonAsyncTaskNoticias  extends AsyncTask {
     private String cadena = "";
     private JSONArray jsonArray;
     private Drawable[] drawables;
-    private Boolean conexion = false;
+    //private Boolean conexion = false;
     private final String IP="10.0.2.2";
 
     public JsonAsyncTaskNoticias(Context context) {
@@ -64,7 +64,7 @@ public class JsonAsyncTaskNoticias  extends AsyncTask {
                         .openConnection();
                 drawables[i] = Drawable.createFromStream(con.getInputStream(), "src name");
             }
-            conexion = true;
+            //conexion = true;
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {

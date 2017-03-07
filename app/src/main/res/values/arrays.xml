@@ -11,7 +11,7 @@
         <item name="3">10</item>
     </string-array>
     <string-array name="dificultad">
-        <item name="1">Normal</item>
-        <item name="2">Experto</item>
+        <item name="1">Individual</item>
+        <item name="2">Multijugador</item>
     </string-array>
 </resources>
