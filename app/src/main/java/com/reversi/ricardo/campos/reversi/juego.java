@@ -1,28 +1,21 @@
 package com.reversi.ricardo.campos.reversi;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 public class juego extends AppCompatActivity {
 
@@ -90,29 +83,6 @@ public class juego extends AppCompatActivity {
         boton[mitad-1][mitad].setText("M");
         mostrarFichaMaquina(mitad-1,mitad);
         buscarCasillasPermitidas();
-
-    /*
-        boton[1][1].setText("J");
-        boton[0][0].setText("J");
-        boton[0][1].setText("M");
-        boton[1][0].setText("M");
-
-        boton[0][TAM-1].setText("J");
-        boton[1][TAM-2].setText("J");
-        boton[0][TAM-2].setText("M");
-        boton[1][TAM-1].setText("M");
-
-        boton[TAM-1][0].setText("J");
-        boton[TAM-2][1].setText("J");
-        boton[TAM-1][1].setText("M");
-        boton[TAM-2][0].setText("M");
-
-        boton[TAM-1][TAM-1].setText("J");
-        boton[TAM-2][TAM-2].setText("J");
-        boton[TAM-1][TAM-2].setText("M");
-        boton[TAM-2][TAM-1].setText("M");
-
-*/
     }
 
 
@@ -123,12 +93,10 @@ public class juego extends AppCompatActivity {
             int posible = 0;
             int jugador = 0;
             int maquina = 0;
-            int cont = 0;
             ArrayList<String> random = new ArrayList<>(0);
             String tag;
             for (int i = 0; i < TAM;i++) {
                 for (int j = 0; j < TAM; j++) {
-
                     if (boton[i][j].getText().equals("P"))
                     {
                         posible++;

@@ -28,10 +28,4 @@ public class puntuaciones extends AppCompatActivity {
             list.setAdapter(mAdapter);
         }
     }
-
-    /*public void onBackPressed() {
-
-        this.finish();
-    }*/
-
 }

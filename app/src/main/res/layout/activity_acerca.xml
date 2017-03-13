@@ -54,7 +54,7 @@
             android:layout_weight="0.26"
             android:fontFamily="casual"
             android:gravity="center"
-            android:text="Versión: 1.4"
+            android:text="Versión: 1.5"
             android:textAlignment="center"
             android:textSize="18sp" />
 

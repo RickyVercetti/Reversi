@@ -42,12 +42,6 @@ public class inicio extends AppCompatActivity {
             Intent intent = new Intent(this, instrucciones.class);
             startActivity(intent);
         }
-        else if (id == R.id.noticias)
-        {
-            //Intent intent = new Intent(this, JsonAdapterNoticias.class);
-            //startActivity(intent);
-            Toast.makeText(this, "Disponible próximamente!", Toast.LENGTH_SHORT).show();
-        }
         else if (id == R.id.puntuaciones)
         {
             Intent intent = new Intent(this, puntuaciones.class);

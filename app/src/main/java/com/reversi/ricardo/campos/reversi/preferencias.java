@@ -11,9 +11,4 @@ public class preferencias extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferencias);
     }
-
-    /*public void onBackPressed() {
-
-        this.finish();
-    }*/
 }

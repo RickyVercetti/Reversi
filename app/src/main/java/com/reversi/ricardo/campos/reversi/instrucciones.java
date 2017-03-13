@@ -10,8 +10,4 @@ public class instrucciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrucciones);
     }
-    /*public void onBackPressed() {
-
-        this.finish();
-    }*/
 }
