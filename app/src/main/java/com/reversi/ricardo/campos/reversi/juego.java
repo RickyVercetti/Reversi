@@ -42,7 +42,7 @@ public class juego extends AppCompatActivity {
         //Creamos el Layout dinámico
         LayoutInflater inflater = LayoutInflater.from(this);
         RelativeLayout layout_secundario = (RelativeLayout) inflater.inflate(R.layout.activity_juego, null, false);
-        LinearLayout dinamico = (LinearLayout) layout_secundario.findViewById(R.id.dinamico);
+        LinearLayout dinamico = layout_secundario.findViewById(R.id.dinamico);
 
         //Configurar los botones para que todos tengan el mismo peso
         LinearLayout.LayoutParams configuracion = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -136,7 +136,7 @@ public class juego extends AppCompatActivity {
 
         }
     };
-
+    
     private void cambioTurno() {
 
         Toast.makeText(getApplicationContext(), "Imposible insertar una ficha, cambio de turno!", Toast.LENGTH_LONG).show();
@@ -172,8 +172,8 @@ public class juego extends AppCompatActivity {
                 turnoJugador=true;
             }
 
-            textoJugador = (TextView) findViewById(R.id.puntuacionJugador);
-            textoMaquina = (TextView) findViewById(R.id.puntuacionMaquina);
+            textoJugador = findViewById(R.id.puntuacionJugador);
+            textoMaquina = findViewById(R.id.puntuacionMaquina);
             int contadorMaquina = 0;
             int contadorJugador = 0;
             int casillasVacias = 0;
@@ -696,7 +696,8 @@ public class juego extends AppCompatActivity {
 
         if (ayuda)
         {
-            boton[i][j].paint.setARGB(255,148,148,148);
+            /*boton[i][j].paint.setARGB(255,148,148,148);*/
+            boton[i][j].paint.setARGB(255,250 ,50,50);
             boton[i][j].invalidate();
         }
         else
