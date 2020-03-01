@@ -19,17 +19,15 @@ import java.util.ArrayList;
 
 public class juego extends AppCompatActivity {
 
-
     SharedPreferences sharedPreferences;
     private int TAM;
     private boolean ayuda;
     private String dificultad;
 
-    MiBoton boton[][];
+    MiBoton [][] boton;
     TextView textoJugador = null;
     TextView textoMaquina = null;
     private boolean turnoJugador;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

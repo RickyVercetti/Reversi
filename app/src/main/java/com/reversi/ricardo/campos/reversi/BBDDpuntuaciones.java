@@ -4,15 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by alumno on 03/02/2017.
- */
-
 public class BBDDpuntuaciones extends SQLiteOpenHelper{
 
-    String sqlCreate = "CREATE TABLE puntuaciones (nom TEXT, puntuacion TEXT, fecha TEXT)";
+    private String sqlCreate = "CREATE TABLE puntuaciones (nom TEXT, puntuacion TEXT, fecha TEXT)";
 
-    public BBDDpuntuaciones(Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version)
+    private BBDDpuntuaciones(Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version)
     {
         super(contexto, nombre, factory, version);
     }

@@ -5,18 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.widget.Button;
 
-/**
- * Created by Ricardo on 17/2/17.
- */
-
-public class MiBoton extends Button {
+public class MiBoton extends android.support.v7.widget.AppCompatButton {
 
     public MiBoton(Context context) {
         super(context);
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setARGB(0,50,50,50);
-
     }
 
     Paint paint;
