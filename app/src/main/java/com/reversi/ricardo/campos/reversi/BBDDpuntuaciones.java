@@ -8,7 +8,7 @@ public class BBDDpuntuaciones extends SQLiteOpenHelper{
 
     private String sqlCreate = "CREATE TABLE puntuaciones (nom TEXT, puntuacion TEXT, fecha TEXT)";
 
-    private BBDDpuntuaciones(Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version)
+    public BBDDpuntuaciones(Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version)
     {
         super(contexto, nombre, factory, version);
     }
